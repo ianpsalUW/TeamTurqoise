@@ -20,6 +20,8 @@ public class Main {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setResizable(true);
-        System.out.println("Hi");
+
+        // Test Statement
+        System.out.println("Hello World!");
     }
 }
