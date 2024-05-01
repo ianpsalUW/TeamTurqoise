@@ -2,12 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
-
- A basic GUI with components such as
- minimizing, resizing, exiting, etc.
+ * A basic GUI with an About screen and a screen to
+ * enter in your first name and email address.
  *
- @version JDK 21.0
- @author Christian Pineda
+ * @version JDK 21.0
+ * @author Jordan Festin, Bill Lactaoen, Christian Pineda, Ian Salsich
  */
 
 public class Main {
