@@ -20,6 +20,10 @@ public class Main {
         frame.setVisible(true);
         frame.setResizable(true);
 
+        frame.add(createMainPanel());
+    }
+
+    public static JPanel createMainPanel() {
         JPanel mainPanel = new JPanel();
         JButton setupButton = new JButton("Setup Account");
         setupButton.setPreferredSize(new Dimension(120, 50));
@@ -28,6 +32,7 @@ public class Main {
 
         mainPanel.add(setupButton);
         mainPanel.add(aboutButton);
-        frame.add(mainPanel);
+
+        return mainPanel;
     }
 }
