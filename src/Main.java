@@ -20,9 +20,14 @@ public class Main {
         frame.setVisible(true);
         frame.setResizable(true);
 
-        // Test Statement
-        System.out.println("Hello World!");
-        System.out.println("dog");
-        System.out.println("Is this thing working??");
+        JPanel mainPanel = new JPanel();
+        JButton setupButton = new JButton("Setup Account");
+        setupButton.setPreferredSize(new Dimension(120, 50));
+        JButton aboutButton = new JButton("About");
+        aboutButton.setPreferredSize(new Dimension(120, 50));
+
+        mainPanel.add(setupButton);
+        mainPanel.add(aboutButton);
+        frame.add(mainPanel);
     }
 }
