@@ -27,6 +27,7 @@ public class Main {
 
     public static JPanel createMainPanel() {
         JPanel mainPanel = new JPanel();
+        mainPanel.setBackground(new Color(64, 224, 208));
         JButton setupButton = new JButton("Setup Account");
         setupButton.setPreferredSize(new Dimension(120, 50));
         JButton aboutButton = new JButton("About");
