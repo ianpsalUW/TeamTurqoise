@@ -13,12 +13,38 @@ import java.awt.*;
 
 public class Main {
 
+    /**
+     * Instance field of the GUI's Login/Register button.
+     */
     private static JButton setupButton;
+
+    /**
+     * Instance field of the GUI's About Page button.
+     */
     private static JButton aboutButton;
+
+    /**
+     * Instance field of the user database.
+     */
     private static UserDB userDB;
+
+    /**
+     * Instance field of the current user in the GUI.
+     */
     private static User currentUser;
+
+    /**
+     * Instance field of the About object.
+     */
     private static About about;
 
+
+    /**
+     * Creates the main GUI application and sets up
+     * the developers' names in the About object.
+     *
+     * @param args  the args
+     */
     public static void main(String[] args) {
         JFrame frame = new JFrame("Basic GUI v0.0");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,15 +57,21 @@ public class Main {
         userDB = new UserDB();
 
         about = new About();
-        about.add("Christian Pineda - \"Tired rn\"");
-        about.add("Ian Salsich - \":)\"" +
-                "\nBill Lactaoen - \"suffering\"");
         about.add("Jordan Festin - \"zzz\"");
+        about.add("Bill Lactaoen - \"suffering\"");
+        about.add("Christian Pineda - \"Hungry rn\"");
+        about.add("Ian Salsich - \":)\"");
 
         frame.add(createMainPanel());
         addListeners();
     }
 
+    /**
+     * Creates the panel containing the buttons
+     * for Login/Register and About Page.
+     *
+     * @return a JPanel with Login/Register and About buttons
+     */
     public static JPanel createMainPanel() {
         JPanel mainPanel = new JPanel();
         mainPanel.setBackground(new Color(64, 224, 208));
@@ -54,12 +86,24 @@ public class Main {
         return mainPanel;
     }
 
+    /**
+     * Adds actions to the Login/Register and About Page buttons.
+     */
     private static void addListeners() {
         setupButton.addActionListener(theEvent -> new LogInFrame(userDB));
 
-        aboutButton.addActionListener(theEvent -> new AboutFrame(currentUser, about));
+        aboutButton.addActionListener(theEvent -> {
+            if (currentUser != null) {
+                new AboutFrame(currentUser, about);
+            }
+        });
     }
 
+    /**
+     * Changes the current user.
+     *
+     * @param theUser   the user to be changed
+     */
     static void setCurrentUser(final User theUser) {
         currentUser = theUser;
     }
