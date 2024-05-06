@@ -32,7 +32,8 @@ public class Main {
 
         about = new About();
         about.add("Christian Pineda - \"Tired rn\"");
-        about.add("Ian Salsich - \":)\"");
+        about.add("Ian Salsich - \":)\"" +
+                "Bill Lactaoen - \"suffering\"");
 
         frame.add(createMainPanel());
         addListeners();
