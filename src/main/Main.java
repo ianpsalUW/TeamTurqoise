@@ -29,7 +29,9 @@ public class Main {
         frame.setResizable(true);
 
         userDB = new UserDB();
+
         about = new About();
+        about.add("Christian Pineda - \"Tired rn\"");
 
         frame.add(createMainPanel());
         addListeners();
@@ -38,7 +40,7 @@ public class Main {
     public static JPanel createMainPanel() {
         JPanel mainPanel = new JPanel();
         mainPanel.setBackground(new Color(64, 224, 208));
-        setupButton = new JButton("Setup Account");
+        setupButton = new JButton("Login Account");
         setupButton.setPreferredSize(new Dimension(120, 50));
         aboutButton = new JButton("About");
         aboutButton.setPreferredSize(new Dimension(120, 50));
@@ -50,13 +52,9 @@ public class Main {
     }
 
     private static void addListeners() {
-        setupButton.addActionListener(theEvent -> {
-            new LogInFrame(userDB);
-        });
+        setupButton.addActionListener(theEvent -> new LogInFrame(userDB));
 
-        aboutButton.addActionListener(theEvent -> {
-            new AboutFrame(currentUser, about);
-        });
+        aboutButton.addActionListener(theEvent -> new AboutFrame(currentUser, about));
     }
 
     static void setCurrentUser(final User theUser) {
