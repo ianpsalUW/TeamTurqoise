@@ -13,6 +13,12 @@ import java.awt.*;
 
 public class Main {
 
+    private static JButton setupButton;
+    private static JButton aboutButton;
+    private static UserDB userDB;
+    private static User currentUser;
+    private static About about;
+
     public static void main(String[] args) {
         JFrame frame = new JFrame("Basic GUI v0.0");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -22,20 +28,36 @@ public class Main {
         frame.setVisible(true);
         frame.setResizable(true);
 
+        userDB = new UserDB();
+
+        about = new About();
+        about.add("Christian Pineda - \"Tired rn\"");
+
         frame.add(createMainPanel());
+        addListeners();
     }
 
     public static JPanel createMainPanel() {
         JPanel mainPanel = new JPanel();
         mainPanel.setBackground(new Color(64, 224, 208));
-        JButton setupButton = new JButton("Setup Account");
+        setupButton = new JButton("Login Account");
         setupButton.setPreferredSize(new Dimension(120, 50));
-        JButton aboutButton = new JButton("About");
+        aboutButton = new JButton("About");
         aboutButton.setPreferredSize(new Dimension(120, 50));
 
         mainPanel.add(setupButton);
         mainPanel.add(aboutButton);
 
         return mainPanel;
+    }
+
+    private static void addListeners() {
+        setupButton.addActionListener(theEvent -> new LogInFrame(userDB));
+
+        aboutButton.addActionListener(theEvent -> new AboutFrame(currentUser, about));
+    }
+
+    static void setCurrentUser(final User theUser) {
+        currentUser = theUser;
     }
 }
