@@ -16,6 +16,7 @@ public class Main {
     private static JButton setupButton;
     private static JButton aboutButton;
     private static UserDB userDB;
+    private static User currentUser;
     private static About about;
 
     public static void main(String[] args) {
@@ -48,13 +49,17 @@ public class Main {
         return mainPanel;
     }
 
-    private void addListeners() {
+    private static void addListeners() {
         setupButton.addActionListener(theEvent -> {
             new LogInFrame(userDB);
         });
 
         aboutButton.addActionListener(theEvent -> {
-            new AboutFrame();
+            new AboutFrame(currentUser, about);
         });
+    }
+
+    static void setCurrentUser(final User theUser) {
+        currentUser = theUser;
     }
 }
