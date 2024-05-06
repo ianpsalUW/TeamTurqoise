@@ -28,6 +28,7 @@ public class Main {
         frame.setResizable(true);
 
         userDB = new UserDB();
+        about = new About();
 
         frame.add(createMainPanel());
         addListeners();
