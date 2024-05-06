@@ -33,7 +33,7 @@ public class Main {
         about = new About();
         about.add("Christian Pineda - \"Tired rn\"");
         about.add("Ian Salsich - \":)\"" +
-                "Bill Lactaoen - \"suffering\"");
+                "\nBill Lactaoen - \"suffering\"");
         about.add("Jordan Festin - \"zzz\"");
 
         frame.add(createMainPanel());
