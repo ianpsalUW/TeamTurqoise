@@ -34,6 +34,7 @@ public class Main {
         about.add("Christian Pineda - \"Tired rn\"");
         about.add("Ian Salsich - \":)\"" +
                 "Bill Lactaoen - \"suffering\"");
+        about.add("Jordan Festin - \"zzz\"");
 
         frame.add(createMainPanel());
         addListeners();
