@@ -31,8 +31,8 @@ public class Main {
         userDB = new UserDB();
 
         about = new About();
-        about.add("Christian Pineda - \"Tired rn\" " +
-                "Bill Lactaoen - \"Suffering\"");
+        about.add("Christian Pineda - \"Tired rn\"");
+        about.add("Ian Salsich - \":)\"");
 
         frame.add(createMainPanel());
         addListeners();
