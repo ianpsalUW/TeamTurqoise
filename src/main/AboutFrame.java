@@ -3,12 +3,34 @@ package main;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A class which displays an About page containing the current
+ * user, the app developers, and the current user.
+ *
+ * @version JDK 21.0
+ * @author Christian Pineda
+ */
+
 public class AboutFrame extends JFrame {
 
+    /**
+     * Instance field containing the information of the current user.
+     */
     private final User myUser;
+    /**
+     * Instance field containing an About object.
+     */
     private final About myAbout;
 
-    public AboutFrame(User theAcct, About theAbt) {
+
+    /**
+     * Constructor which initializes a JFrame,
+     * the User object, and the About object.
+     *
+     * @param theUser   the current user
+     * @param theAbt    an About object
+     */
+    public AboutFrame(User theUser, About theAbt) {
         super("About");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(new Dimension(300, 220));
@@ -17,11 +39,17 @@ public class AboutFrame extends JFrame {
         setResizable(false);
         setVisible(true);
 
-        myUser = theAcct;
+        myUser = theUser;
         myAbout = theAbt;
         add(presentMessage());
     }
 
+    /**
+     * Displays a JTextPane which shows the name and email of the current
+     * user, the list of developers, and the current version number.
+     *
+     * @return a JTextPane to act as the About page
+     */
     private JTextPane presentMessage() {
         JTextPane text = new JTextPane();
         text.setEditable(false);
