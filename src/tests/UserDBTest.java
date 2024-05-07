@@ -1,6 +1,9 @@
-package main;
+package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import main.User;
+import main.UserDB;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
