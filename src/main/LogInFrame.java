@@ -5,12 +5,50 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A class to create and display a log in window.
+ * It takes a username and email to either log in or create a new user.
+ *
+ * @version JDK 21.0
+ * @author Bill Lactaoen
+ */
+
 public class LogInFrame extends JFrame implements ActionListener {
+
+    /**
+    This is the field for the username text field.
+     */
+
     private final JTextField myUsernameField;
+
+    /**
+     * This is the field for the email text field.
+     */
+
     private final JTextField myEmailField;
+
+    /**
+     * This is the field for the log in button.
+     */
+
     private final JButton myLoginButton;
+
+    /**
+     * This is the field for the register account button.
+     */
+
     private final JButton myRegisterButton;
+
+    /**
+     * This is the log in for the user database being used.
+     */
+
     private final UserDB myUserDatabase;
+
+    /**
+     * This is the main constructor for the log in frame. It creates and displays the window.
+     * @param theUserDatabase is the user database that the program is running.
+     */
 
     public LogInFrame(UserDB theUserDatabase) {
         this.myUserDatabase = theUserDatabase;
@@ -42,6 +80,7 @@ public class LogInFrame extends JFrame implements ActionListener {
         add(panel);
         setVisible(true);
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -77,6 +116,12 @@ public class LogInFrame extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, "User Registered Successfully");
         }
     }
+
+    /**
+     * This is a method to ensure that the email is of the email address pattern.
+     * @param email is the email to check.
+     * @return true if it follows the pattern, false otherwise.
+     */
 
     private boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
