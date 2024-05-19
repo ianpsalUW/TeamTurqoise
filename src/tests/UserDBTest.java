@@ -29,10 +29,10 @@ class UserDBTest {
     }
 
     @Test
-    public final void getUserByEmailTest() {
-        assertEquals("Lola", usDB.getUserByEmail("LolaEmail@Email.com").getName());
-    }
+    public final void getUserByEmailTest() { assertEquals("Lola", usDB.getUserByEmail("LolaEmail@Email.com").getName()); }
 
+    @Test
+    public final void UserDBToStringTest() { assertEquals("Bill BillsEmail@Email.com\nLola LolaEmail@Email.com", usDB.toString()); }
 
 
 }

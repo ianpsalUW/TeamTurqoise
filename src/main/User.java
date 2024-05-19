@@ -1,5 +1,10 @@
 package main;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * This is the class to designate a user. It stores a username and email address.
  *
@@ -7,7 +12,10 @@ package main;
  * @author Bill Lactaoen
  */
 
-public class User {
+public class User implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     /**
      * This is the field for the name of the user.
@@ -77,6 +85,24 @@ public class User {
 
     public String getEmail() {
         return myEmail;
+    }
+
+    @Override
+    public String toString() { return myName + " " + myEmail; }
+
+    public void exportUser() {
+        ObjectOutputStream oos = null;
+        FileOutputStream fout = null;
+        try {
+            fout = new FileOutputStream("C:\\Users\\stflaptop\\Desktop\\360Turqoise\\BasicGUI\\src\\profile.txt", true);
+            oos = new ObjectOutputStream(fout);
+            oos.writeObject(this);
+        } catch (Exception ignored) {}
+        finally {
+            if (oos != null) {
+                try {oos.close();} catch (Exception ignored){}
+            }
+        }
     }
 
 }

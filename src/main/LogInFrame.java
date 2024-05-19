@@ -113,6 +113,7 @@ public class LogInFrame extends JFrame implements ActionListener {
 
             User newUser = new User(username, email);
             myUserDatabase.addUser(newUser);
+            //newUser.exportUser(); //Adds user to save file
             JOptionPane.showMessageDialog(this, "User Registered Successfully");
         }
     }

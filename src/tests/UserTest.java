@@ -28,5 +28,8 @@ class UserTest {
         assertEquals("JSmith@yahoo.com", usTest.getEmail());
     }
 
+    @Test
+    public final void toStringTest() { assertEquals("John JSmith@yahoo.com", usTest.toString());}
+
 
 }
