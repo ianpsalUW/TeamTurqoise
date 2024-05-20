@@ -96,7 +96,7 @@ public class User implements Serializable {
         try {
             fout = new FileOutputStream("C:\\Users\\stflaptop\\Desktop\\360Turqoise\\BasicGUI\\src\\profile.txt", true);
             oos = new ObjectOutputStream(fout);
-            oos.writeObject(this);
+            oos.writeObject(toString());
         } catch (Exception ignored) {}
         finally {
             if (oos != null) {

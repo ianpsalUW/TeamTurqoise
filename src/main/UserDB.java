@@ -102,7 +102,7 @@ public class UserDB implements Serializable {
         try {
             fout = new FileOutputStream(fileLocation, true);
             oos = new ObjectOutputStream(fout);
-            oos.writeObject(this);
+            oos.writeObject(toString());
         } catch (Exception ignored) {}
         finally {
             if (oos != null) {
