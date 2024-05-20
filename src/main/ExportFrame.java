@@ -43,7 +43,7 @@ public class ExportFrame extends JFrame implements ActionListener {
         myExportButton.addActionListener(this);
 
         add(panel);
-
+        setVisible(true);
     }
 
     @Override
