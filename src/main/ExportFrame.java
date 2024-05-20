@@ -30,7 +30,7 @@ public class ExportFrame extends JFrame implements ActionListener {
         panel.setLayout(new GridLayout(4, 2));
         JLabel FileLocationLabel = new JLabel("File Path Location:");
         myFileLocationField = new JTextField();
-        JLabel FileNameLabel = new JLabel("Email:");
+        JLabel FileNameLabel = new JLabel("File Name:");
         myFileNameField = new JTextField();
         myExportButton = new JButton("Export");
 
