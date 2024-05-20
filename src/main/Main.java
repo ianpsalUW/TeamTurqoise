@@ -25,6 +25,8 @@ public class Main {
 
     private static JButton exportButton;
 
+    private static JButton importButton;
+
     /**
      * Instance field of the user database.
      */
@@ -83,10 +85,13 @@ public class Main {
         aboutButton.setPreferredSize(new Dimension(120, 50));
         exportButton = new JButton("Export");
         exportButton.setPreferredSize(new Dimension(120, 50));
+        importButton = new JButton("Import");
+        importButton.setPreferredSize(new Dimension(120, 50));
 
         mainPanel.add(setupButton);
         mainPanel.add(aboutButton);
         mainPanel.add(exportButton);
+        mainPanel.add(importButton);
 
         return mainPanel;
     }
@@ -104,6 +109,8 @@ public class Main {
         });
 
         exportButton.addActionListener(theEvent -> new ExportFrame(userDB));
+
+        importButton.addActionListener(theEvent -> new ImportFrame());
     }
 
     /**
