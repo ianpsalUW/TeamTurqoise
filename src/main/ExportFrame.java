@@ -28,7 +28,7 @@ public class ExportFrame extends JFrame implements ActionListener {
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(4, 2));
-        JLabel FileLocationLabel = new JLabel("Username:");
+        JLabel FileLocationLabel = new JLabel("File Path Location:");
         myFileLocationField = new JTextField();
         JLabel FileNameLabel = new JLabel("Email:");
         myFileNameField = new JTextField();
