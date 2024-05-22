@@ -5,7 +5,7 @@ import java.awt.*;
 
 /**
  * A class which displays an About page containing the current
- * user, the app developers.
+ * user and the app developers.
  *
  * @version JDK 21.0
  * @author Christian Pineda
