@@ -1,5 +1,12 @@
 package main;
 
+import model.About;
+import model.ImportFrame;
+import model.User;
+import model.UserDB;
+import view.AboutFrame;
+import view.ExportFrame;
+
 import javax.swing.*;
 import java.awt.*;
 

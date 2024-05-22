@@ -1,4 +1,7 @@
-package main;
+package view;
+
+import model.User;
+import model.About;
 
 import javax.swing.*;
 import java.awt.*;

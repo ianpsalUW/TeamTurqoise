@@ -1,4 +1,6 @@
-package main;
+package view;
+
+import model.UserDB;
 
 import javax.swing.*;
 import java.awt.*;

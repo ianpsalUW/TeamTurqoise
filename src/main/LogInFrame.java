@@ -1,5 +1,8 @@
 package main;
 
+import model.User;
+import model.UserDB;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
