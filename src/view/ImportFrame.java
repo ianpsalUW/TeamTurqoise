@@ -1,4 +1,4 @@
-package model;
+package view;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +8,7 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.List;
 import java.util.function.Consumer;
+import model.ImportFile;
 
 public class ImportFrame extends JFrame {
 
