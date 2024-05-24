@@ -8,6 +8,17 @@ public class Project {
 
     Budget myBudget;
 
+    boolean myPrivacy = false;
+
+    public Project() {
+
+    }
+
+    public Project(ArrayList<Document> theDocumentList, boolean thePrivacy) {
+        myDocumentList = theDocumentList;
+        myPrivacy = thePrivacy;
+    }
+
     public ArrayList<Document> getDocuments() {
         return myDocumentList;
     }
