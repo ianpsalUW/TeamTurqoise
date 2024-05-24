@@ -1,7 +1,7 @@
 package main;
 
 import model.About;
-import model.ImportFrame;
+import view.ImportFrame;
 import model.User;
 import model.UserDB;
 import view.AboutFrame;

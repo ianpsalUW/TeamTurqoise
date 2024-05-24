@@ -5,11 +5,11 @@ Classes to Review:
     About
         - Displays an About page containing the current user and the app developers.
         - Supports USX02: "As a user I want to see an About screen for the app so I can see the version number"
-        - Location: src -> main (package)
+        - Location: src -> model (package)
     AboutFrame
         - Displays an About tab containing the current user and the app developers.
         - Supports USX02: "As a user I want to see an About screen for the app so I can see the version number"
-        - Location: src -> main (package)
+        - Location: src -> view (package)
 
 Coding Conventions:
     - Class Javadocs with the main author(s)
