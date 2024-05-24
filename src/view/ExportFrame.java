@@ -43,7 +43,9 @@ public class ExportFrame extends JFrame implements ActionListener {
 
         myExportButton.addActionListener(this);
 
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         add(panel);
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 

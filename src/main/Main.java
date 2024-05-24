@@ -59,7 +59,7 @@ public class Main {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Basic GUI v0.0");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 300);
+        frame.setSize(800, 500);
         frame.getContentPane().setBackground(new Color(64, 224, 208));
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

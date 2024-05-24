@@ -31,7 +31,7 @@ public class LogInFrame extends JFrame implements ActionListener {
     private final JTextField myEmailField;
 
     /**
-     * This is the field for the log in button.
+     * This is the field for the login button.
      */
 
     private final JButton myLoginButton;
@@ -80,7 +80,9 @@ public class LogInFrame extends JFrame implements ActionListener {
         myLoginButton.addActionListener(this);
         myRegisterButton.addActionListener(this);
 
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         add(panel);
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 

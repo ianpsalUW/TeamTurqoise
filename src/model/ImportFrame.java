@@ -105,6 +105,7 @@ public class ImportFrame extends JFrame {
             }
         }));
 
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
     }
