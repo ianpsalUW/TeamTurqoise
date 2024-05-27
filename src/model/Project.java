@@ -6,6 +6,8 @@ public class Project {
 
     ArrayList<Document> myDocumentList = new ArrayList<>();
 
+    String myProjectName = "Default name";
+
     Budget myBudget;
 
     boolean myPrivacy = false;
@@ -14,9 +16,10 @@ public class Project {
 
     }
 
-    public Project(ArrayList<Document> theDocumentList, boolean thePrivacy) {
-        myDocumentList = theDocumentList;
+    public Project(String theProjectName, boolean thePrivacy, Budget theBudget) {
+        myProjectName = theProjectName;
         myPrivacy = thePrivacy;
+        myBudget = theBudget;
     }
 
     public ArrayList<Document> getDocuments() {
