@@ -96,7 +96,7 @@ public class LogInFrame extends JFrame implements ActionListener {
             User user = myUserDatabase.getUserByName(username);
             if (user != null && user.logIn(username, email)) {
                 JOptionPane.showMessageDialog(this, "Login Successful!");
-                Main.setCurrentUser(user);
+                MainFrame.setCurrentUser(user);
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid Username or Email!");

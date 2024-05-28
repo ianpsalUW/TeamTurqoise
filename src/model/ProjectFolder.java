@@ -1,22 +1,31 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ProjectFolder {
 
-    ArrayList<Project> myProjectList = new ArrayList<>();
+    List<Project> myProjectList;
 
     String myProjectFolderName = "Default name";
 
-    public ProjectFolder() {
-
+    public ProjectFolder(List<Project> projects) {
+        myProjectList = projects;
     }
 
-    public ProjectFolder(String theProjectFolderName) {
+    public ProjectFolder(String theProjectFolderName, List<Project> projects) {
         myProjectFolderName = theProjectFolderName;
+        myProjectList = projects;
     }
 
-    public ArrayList<Project> getProjectList() {
+    public List<Project> getProjectList() {
         return myProjectList;
+    }
+
+    public String getName() {
+        return myProjectFolderName;
+    }
+
+    public void addProject(Project project) {
+        myProjectList.add(project);
     }
 }

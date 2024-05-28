@@ -9,6 +9,7 @@ public class Project {
     String myProjectName = "Default name";
 
     Budget myBudget;
+    Spending mySpending;
 
     boolean myPrivacy = false;
 
@@ -20,6 +21,7 @@ public class Project {
         myProjectName = theProjectName;
         myPrivacy = thePrivacy;
         myBudget = theBudget;
+        mySpending = new Spending();
     }
 
     public ArrayList<Document> getDocuments() {
@@ -45,4 +47,11 @@ public class Project {
         return myBudget;
     }
 
+    public Spending getSpending() {
+        return mySpending;
+    }
+
+    public String getName() {
+        return myProjectName;
+    }
 }

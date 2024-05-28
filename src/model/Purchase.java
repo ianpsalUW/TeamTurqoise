@@ -13,9 +13,9 @@ public class Purchase {
         myDate = theDate;
     }
 
-    private void setName(String theName) { myName = theName; }
-    private void setPrice(BigDecimal thePrice) { myPrice = thePrice; }
-    private void setDate(String theDate) {myDate = theDate; }
+    public void setName(String theName) { myName = theName; }
+    public void setPrice(BigDecimal thePrice) { myPrice = thePrice; }
+    public void setDate(String theDate) {myDate = theDate; }
     public String getName() { return myName; }
     public BigDecimal getPrice() { return myPrice; }
     public String getDate() { return myDate; }
