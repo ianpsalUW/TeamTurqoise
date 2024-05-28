@@ -1,15 +1,17 @@
 package model;
 
-public class Budget {
-    private long myBudget;
+import java.math.BigDecimal;
 
-    public Budget (final long theBudget){
+public class Budget {
+    private BigDecimal myBudget;
+
+    public Budget (final BigDecimal theBudget){
         setBudget(theBudget);
     }
 
-    private void setBudget(long theBudget){ myBudget = theBudget; }
+    private void setBudget(BigDecimal theBudget){ myBudget = theBudget; }
 
-    public long getBudget(){ return myBudget; }
+    public BigDecimal getBudget(){ return myBudget; }
 
-    public boolean checkBudget(long theValue) { return (myBudget <= theValue);}
+    public boolean checkBudget(BigDecimal theValue) { return (myBudget.compareTo(theValue) <= 0);}
 }

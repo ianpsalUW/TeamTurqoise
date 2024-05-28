@@ -1,20 +1,21 @@
 package model;
 
+import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 
 public class Spending {
 
-    private double myTotal;
+    private BigDecimal myTotal;
 
     private final List<Purchase> myPurchases;
 
-    public Spending() { myPurchases = new ArrayList<>(); setTotal(0);}
+    public Spending() { myPurchases = new ArrayList<>(); setTotal(BigDecimal.valueOf(0));}
 
-    private void setTotal(double theTotal) { myTotal = theTotal; }
+    private void setTotal(BigDecimal theTotal) { myTotal = theTotal; }
 
-    public double getTotal() { return myTotal; }
+    public BigDecimal getTotal() { return myTotal; }
 
     public void addPurchase(Purchase thePurchase) { myPurchases.add(thePurchase); }
 
@@ -31,9 +32,10 @@ public class Spending {
     }
 
     public void countTotal(){
-        double total = 0;
-        for (Purchase purchase : myPurchases) {
-            total += purchase.getPrice();
+        BigDecimal total = BigDecimal.ZERO;
+        for (Purchase i : myPurchases) {
+
+           total = total.add(i.getPrice());
         }
 
         myTotal = total;
