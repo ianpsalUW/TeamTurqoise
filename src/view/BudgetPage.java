@@ -35,7 +35,8 @@ public class BudgetPage extends JFrame {
         totalPanel.setMinimumSize(new Dimension(700, 35));
         totalPanel.setMaximumSize(new Dimension(700, 35));
         totalPanel.setBackground(new Color(64, 224, 208));
-        totalLabel = new JLabel("Total Budget: " + project.getSpending().getTotal());
+        totalLabel = new JLabel("Total Budget: " +
+                project.getBudget().getBudget().setScale(2, RoundingMode.HALF_EVEN));
         totalLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         totalLabel.setFont(new Font("Dialog", Font.BOLD, 20));
         editTotalButton = new JButton("Edit");
@@ -49,7 +50,7 @@ public class BudgetPage extends JFrame {
         mainPanel.add(Box.createRigidArea(new Dimension(10, 15)));
 
         currentAmtLabel = new JLabel("Current Spending: " +
-                project.getBudget().getBudget().setScale(2, RoundingMode.HALF_EVEN));
+                project.getSpending().getTotal());
         currentAmtLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         currentAmtLabel.setFont(new Font("Dialog", Font.BOLD, 20));
         mainPanel.add(currentAmtLabel);
