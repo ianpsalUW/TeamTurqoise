@@ -27,6 +27,9 @@ public class DocumentFrame extends JFrame {
         // Set up the frame
         setTitle("Document Viewer");
         setSize(800, 600);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setResizable(false);
 
         // Determine file extension and display accordingly
         String extension = getFileExtension(filePath);
@@ -86,6 +89,8 @@ public class DocumentFrame extends JFrame {
         }
 
         add(scrollPane, BorderLayout.CENTER);
+
+
     }
 
     private void displayImageFile(File file) {
