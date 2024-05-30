@@ -58,14 +58,25 @@ public class AboutFrame extends JFrame {
         text.setEditable(false);
         text.setBackground(new Color(229, 217, 191));
 
-        String msg = String.format("""
+        String msg;
+        if (myUser == null) {
+            msg = String.format("""
+                This App Is Registered To:
+                *guest - no log in*
+
+                This App Provided By:
+                %s
+                Version: %.1f""", myAbout.devToString(), myAbout.getVersion());
+        } else {
+            msg = String.format("""
                 This App Is Registered To:
                 %s (%s)
 
                 This App Provided By:
                 %s
                 Version: %.1f""", myUser.getName(), myUser.getEmail(),
-                myAbout.devToString(), myAbout.getVersion());
+                    myAbout.devToString(), myAbout.getVersion());
+        }
         text.setText(msg);
 
         return text;

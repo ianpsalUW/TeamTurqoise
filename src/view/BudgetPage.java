@@ -35,7 +35,7 @@ public class BudgetPage extends JFrame {
         totalPanel.setMinimumSize(new Dimension(700, 35));
         totalPanel.setMaximumSize(new Dimension(700, 35));
         totalPanel.setBackground(new Color(64, 224, 208));
-        totalLabel = new JLabel("Total Budget: " +
+        totalLabel = new JLabel("Total Budget: $" +
                 project.getBudget().getBudget().setScale(2, RoundingMode.HALF_EVEN));
         totalLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         totalLabel.setFont(new Font("Dialog", Font.BOLD, 20));
@@ -49,7 +49,7 @@ public class BudgetPage extends JFrame {
         mainPanel.add(totalPanel);
         mainPanel.add(Box.createRigidArea(new Dimension(10, 15)));
 
-        currentAmtLabel = new JLabel("Current Spending: " +
+        currentAmtLabel = new JLabel("Current Spending: $" +
                 project.getSpending().getTotal());
         currentAmtLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         currentAmtLabel.setFont(new Font("Dialog", Font.BOLD, 20));
@@ -90,7 +90,7 @@ public class BudgetPage extends JFrame {
             String input = JOptionPane.showInputDialog("Enter new budget:");
             BigDecimal newTotal = new BigDecimal(input);
             project.getBudget().setBudget(newTotal);
-            totalLabel.setText("Total Budget: " + project.getBudget().getBudget());
+            totalLabel.setText("Total Budget: $" + project.getBudget().getBudget());
         });
 
         viewSpending.addActionListener(event -> displayExpenditures());
@@ -161,7 +161,7 @@ public class BudgetPage extends JFrame {
                     cost.setPrice(newCost);
                     BigDecimal newCurrent2 = newCurrent1.add(cost.getPrice());
                     project.getSpending().setTotal(newCurrent2);
-                    currentAmtLabel.setText("Current Spending: " + project.getSpending().getTotal());
+                    currentAmtLabel.setText("Current Spending: $" + project.getSpending().getTotal());
                     costFrame.dispose();
                 }
             } else if (selection == 1) {
@@ -173,7 +173,7 @@ public class BudgetPage extends JFrame {
 
                     BigDecimal newCurrent = project.getSpending().getTotal().subtract(cost.getPrice());
                     project.getSpending().setTotal(newCurrent);
-                    currentAmtLabel.setText("Current Spending: "
+                    currentAmtLabel.setText("Current Spending: $"
                             + project.getSpending().getTotal());
                     costFrame.dispose();
                 }
@@ -200,7 +200,7 @@ public class BudgetPage extends JFrame {
             Purchase newSpending = new Purchase(enterName.getText(), newCost, date.format(format));
 
             project.getSpending().addPurchase(newSpending);
-            currentAmtLabel.setText("Current Spending: " + project.getSpending().getTotal());
+            currentAmtLabel.setText("Current Spending: $" + project.getSpending().getTotal());
         }
     }
 }

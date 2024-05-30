@@ -49,7 +49,7 @@ public class MainFrame {
     /**
      * Instance field of the About object.
      */
-    private About about;
+    private final About about;
 
 
     public MainFrame() {
@@ -69,7 +69,7 @@ public class MainFrame {
                         new Project("Test Project 1.2", false,
                                 new Budget(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN))))));
         folders.add(new ProjectFolder("Test Folder 2",
-                Arrays.asList(new Project("Project 2.1", false,
+                Arrays.asList(new Project("Test Project 2.1", false,
                 new Budget(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN))),
                         new Project("Test Project 2.2", false,
                 new Budget(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN))))));
@@ -129,11 +129,7 @@ public class MainFrame {
 
         chooseProjectButton.addActionListener(event -> new FolderProjectViewer(folders));
 
-        aboutButton.addActionListener(theEvent -> {
-            if (currentUser != null) {
-                new AboutFrame(currentUser, about);
-            }
-        });
+        aboutButton.addActionListener(theEvent -> new AboutFrame(currentUser, about));
     }
 
     /**
