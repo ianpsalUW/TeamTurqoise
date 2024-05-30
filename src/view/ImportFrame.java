@@ -1,7 +1,8 @@
 package view;
 
+import model.Document;
 import model.ImportFile;
-
+import model.Project;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -11,8 +12,10 @@ public class ImportFrame extends JFrame {
 
     private final JTextField myFilePathTextField;
     private final JTextField myDestinationTextField;
+    private final Project myProject;
 
-    public ImportFrame() {
+    public ImportFrame(Project project) {
+        myProject = project;
         setTitle("File Import");
         setSize(400, 150);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,17 +27,30 @@ public class ImportFrame extends JFrame {
         myDestinationTextField = new JTextField();
         myDestinationTextField.setEditable(true);
 
-        JButton myBrowseButton = getjButton();
+        JButton myBrowseButton = new JButton("Browse");
+        myBrowseButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    myFilePathTextField.setText(selectedFile.getAbsolutePath());
+                }
+            }
+        });
 
         JButton mySaveButton = new JButton("Save");
         mySaveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String sourceFilePath = myFilePathTextField.getText();
                 String destinationFolderPath = myDestinationTextField.getText();
-
                 if (!sourceFilePath.isEmpty() && !destinationFolderPath.isEmpty()) {
                     try {
                         ImportFile.copyFile(sourceFilePath, destinationFolderPath);
+                        File sfile = new File(sourceFilePath);
+                        File file = new File(destinationFolderPath + File.separator + sfile.getName());
+                        Document document = new Document(file.getPath(), file.getName());
+                        myProject.addDocument(document);
                         JOptionPane.showMessageDialog(null, "File copied successfully.");
                     } catch (IOException ex) {
                         JOptionPane.showMessageDialog(null, "Error copying file: " + ex.getMessage());
@@ -64,20 +80,5 @@ public class ImportFrame extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
-    }
-
-    private JButton getjButton() {
-        JButton myBrowseButton = new JButton("Browse");
-        myBrowseButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                int returnValue = fileChooser.showOpenDialog(null);
-                if (returnValue == JFileChooser.APPROVE_OPTION) {
-                    File selectedFile = fileChooser.getSelectedFile();
-                    myFilePathTextField.setText(selectedFile.getAbsolutePath());
-                }
-            }
-        });
-        return myBrowseButton;
     }
 }

@@ -1,5 +1,7 @@
 package model;
 
+import view.DocumentAddedListener;
+
 import java.util.ArrayList;
 
 public class Project {
@@ -13,6 +15,8 @@ public class Project {
 
     boolean myPrivacy = false;
 
+    ArrayList<DocumentAddedListener> myDocumentAddedListeners;
+
     public Project() {
 
     }
@@ -22,6 +26,7 @@ public class Project {
         myPrivacy = thePrivacy;
         myBudget = theBudget;
         mySpending = new Spending();
+        myDocumentAddedListeners = new ArrayList<>();
     }
 
     public ArrayList<Document> getDocuments() {
@@ -30,6 +35,7 @@ public class Project {
 
     public void addDocument(Document theDocument) {
         myDocumentList.add(theDocument);
+        notifyDocumentAddedListeners(theDocument);
     }
 
     public Document removeDocument(Document theDocument) throws Exception {
@@ -53,5 +59,15 @@ public class Project {
 
     public String getName() {
         return myProjectName;
+    }
+
+    public void addDocumentAddedListener(DocumentAddedListener listener) {
+        myDocumentAddedListeners.add(listener);
+    }
+
+    private void notifyDocumentAddedListeners(Document document) {
+        for (DocumentAddedListener listener : myDocumentAddedListeners) {
+            listener.documentAdded(document);
+        }
     }
 }

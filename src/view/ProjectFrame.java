@@ -74,6 +74,10 @@ public class ProjectFrame extends JFrame {
             new BudgetPage(project);
         });
 
+        documentButton.addActionListener(event -> {
+            dispose();
+            new DocumentsView(project);
+        });
         backButton.addActionListener(event -> dispose());
     }
 }

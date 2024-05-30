@@ -27,7 +27,6 @@ public class DocumentFrame extends JFrame {
         // Set up the frame
         setTitle("Document Viewer");
         setSize(800, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Determine file extension and display accordingly
         String extension = getFileExtension(filePath);
@@ -254,8 +253,4 @@ public class DocumentFrame extends JFrame {
         add(label, BorderLayout.CENTER);
     }
 
-    public static void main(String[] args) {
-        DocumentFrame viewer = new DocumentFrame("C:\\Users\\billl\\Downloads\\bitch.pdf");
-        viewer.setVisible(true);
-    }
 }
