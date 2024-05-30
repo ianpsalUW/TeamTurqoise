@@ -48,6 +48,5 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="commons.logging" level="application" />
-    <orderEntry type="library" name="apache.poi1" level="application" />
   </component>
 </module>

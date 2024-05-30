@@ -6,8 +6,7 @@ public class ImportFile {
 
     public static void copyFile(String sourceFilePath, String destinationFolderPath) throws IOException {
         File sourceFile = new File(sourceFilePath);
-        File destinationFolder = new File(System.getProperty("user.home") + File.separator + "Documents"
-                + destinationFolderPath);
+        File destinationFolder = new File(destinationFolderPath);
 
         // Create the "documents" folder if it doesn't exist
         if (!destinationFolder.exists()) {

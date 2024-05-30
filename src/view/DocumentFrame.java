@@ -5,16 +5,19 @@ import java.awt.*;
 import java.io.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.rendering.PDFRenderer;
-import org.apache.poi.hwpf.HWPFDocument;
-import org.apache.poi.hwpf.extractor.WordExtractor;
+import org.apache.poi.xslf.usermodel.XSLFTextShape;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
 import org.apache.poi.xslf.usermodel.XSLFSlide;
+import org.apache.poi.xslf.usermodel.XSLFShape;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 
 public class DocumentFrame extends JFrame {
 
@@ -102,20 +105,71 @@ public class DocumentFrame extends JFrame {
 
     private void displayPdfFile(File file) {
         JPanel pdfPanel = new JPanel() {
+            private BufferedImage renderedImage;
+
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                try (PDDocument document = PDDocument.load(new FileInputStream(file))) {
-                    PDFRenderer pdfRenderer = new PDFRenderer(document);
-                    BufferedImage image = pdfRenderer.renderImageWithDPI(0, 300);
-                    g.drawImage(image, 0, 0, null);
-                } catch (IOException e) {
-                    g.drawString("Error reading PDF file: " + e.getMessage(), 10, 20);
+                if (renderedImage != null) {
+                    g.drawImage(renderedImage, 0, 0, null);
                 }
+            }
+
+            {
+                try {
+                    PDDocument document = Loader.loadPDF(file);
+                    PDFRenderer pdfRenderer = new PDFRenderer(document);
+                    int pageCount = document.getNumberOfPages();
+                    // Render all pages into a single image
+                    int totalHeight = 0;
+                    int maxWidth = 0;
+                    // Initial scale
+                    double scale = 1.0;
+                    for (int i = 0; i < pageCount; i++) {
+                        PDPage page = document.getPage(i);
+                        float width = page.getMediaBox().getWidth();
+                        float height = page.getMediaBox().getHeight();
+                        int scaledWidth = (int) (width * scale);
+                        int scaledHeight = (int) (height * scale);
+                        if (scaledWidth > maxWidth) {
+                            maxWidth = scaledWidth;
+                        }
+                        totalHeight += scaledHeight;
+                    }
+                    renderedImage = new BufferedImage(maxWidth, totalHeight, BufferedImage.TYPE_INT_RGB);
+                    Graphics2D g2d = renderedImage.createGraphics();
+                    int y = 0;
+                    for (int i = 0; i < pageCount; i++) {
+                        PDPage page = document.getPage(i);
+                        float width = page.getMediaBox().getWidth();
+                        float height = page.getMediaBox().getHeight();
+                        int scaledWidth = (int) (width * scale);
+                        int scaledHeight = (int) (height * scale);
+                        BufferedImage image = pdfRenderer.renderImage(i, (float) scale);
+                        g2d.drawImage(image, 0, y, scaledWidth, scaledHeight, null);
+                        y += scaledHeight;
+                    }
+                    g2d.dispose();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public Dimension getPreferredSize() {
+                // Set the preferred size based on the rendered image dimensions
+                if (renderedImage != null) {
+                    return new Dimension(renderedImage.getWidth(), renderedImage.getHeight());
+                }
+                return super.getPreferredSize();
             }
         };
 
         JScrollPane scrollPane = new JScrollPane(pdfPanel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+        // Add components to the frame
         add(scrollPane, BorderLayout.CENTER);
     }
 
@@ -124,21 +178,13 @@ public class DocumentFrame extends JFrame {
         myTextArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(myTextArea);
 
-        try {
-            String text;
-            if (file.getName().endsWith(".doc")) {
-                try (FileInputStream fis = new FileInputStream(file)) {
-                    HWPFDocument doc = new HWPFDocument(fis);
-                    WordExtractor extractor = new WordExtractor(doc);
-                    text = extractor.getText();
-                }
-            } else {
-                try (FileInputStream fis = new FileInputStream(file)) {
-                    XWPFDocument doc = new XWPFDocument(fis);
-                    text = doc.getDocument().getBody().getText();
-                }
+        try (FileInputStream fis = new FileInputStream(file)) {
+            XWPFDocument docx = new XWPFDocument(fis);
+            StringBuilder sb = new StringBuilder();
+            for (XWPFParagraph paragraph : docx.getParagraphs()) {
+                sb.append(paragraph.getText()).append("\n");
             }
-            myTextArea.setText(text);
+            myTextArea.setText(sb.toString());
         } catch (IOException e) {
             myTextArea.setText("Error reading Word file: " + e.getMessage());
         }
@@ -188,7 +234,11 @@ public class DocumentFrame extends JFrame {
             for (XSLFSlide slide : ppt.getSlides()) {
                 sb.append("Slide: ").append(slide.getSlideNumber()).append("\n");
                 sb.append(slide.getTitle()).append("\n");
-                slide.getShapes().forEach(shape -> sb.append(shape.getText()).append("\n"));
+                for (XSLFShape shape : slide.getShapes()) {
+                    if (shape instanceof XSLFTextShape textShape) {
+                        sb.append(textShape.getText()).append("\n");
+                    }
+                }
                 sb.append("\n");
             }
             myTextArea.setText(sb.toString());
@@ -205,14 +255,7 @@ public class DocumentFrame extends JFrame {
     }
 
     public static void main(String[] args) {
-        if (args.length == 0) {
-            System.out.println("Usage: java DocumentFrame <file path>");
-            System.exit(1);
-        }
-
-        SwingUtilities.invokeLater(() -> {
-            DocumentFrame viewer = new DocumentFrame(args[0]);
-            viewer.setVisible(true);
-        });
+        DocumentFrame viewer = new DocumentFrame("C:\\Users\\billl\\Downloads\\bitch.pdf");
+        viewer.setVisible(true);
     }
 }
