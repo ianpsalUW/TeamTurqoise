@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="apache.tika.core" type="repository">
+    <properties maven-id="org.apache.tika:tika-core:LATEST" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/tika/tika-core/3.0.0-BETA/tika-core-3.0.0-BETA.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/commons-io/commons-io/2.15.0/commons-io-2.15.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

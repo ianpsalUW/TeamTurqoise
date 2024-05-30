@@ -27,16 +27,16 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="apache.poi" level="application" />
-    <orderEntry type="library" name="apache.poi.ooxml" level="application" />
-    <orderEntry type="library" name="apache.poi.ooxml.schemas" level="application" />
-    <orderEntry type="library" name="apache.pdfbox" level="application" />
-    <orderEntry type="library" name="apache.tika.core" level="application" />
-    <orderEntry type="library" name="apache.tika.parsers.standard.package" level="application" />
+    <orderEntry type="library" name="apache.poi" level="project" />
+    <orderEntry type="library" name="apache.poi.ooxml" level="project" />
+    <orderEntry type="library" name="apache.poi.ooxml.schemas" level="project" />
+    <orderEntry type="library" name="apache.pdfbox" level="project" />
+    <orderEntry type="library" name="apache.tika.core" level="project" />
+    <orderEntry type="library" name="apache.tika.parsers.standard.package" level="project" />
     <orderEntry type="library" name="apache.commons.compress" level="application" />
-    <orderEntry type="library" name="apache.xmlbeans" level="application" />
-    <orderEntry type="library" name="commons.collections" level="application" />
-    <orderEntry type="library" name="apache.pdfbox.fontbox" level="application" />
+    <orderEntry type="library" name="apache.xmlbeans" level="project" />
+    <orderEntry type="library" name="commons.collections" level="project" />
+    <orderEntry type="library" name="apache.pdfbox.fontbox" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -47,6 +47,6 @@
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="commons.logging" level="application" />
+    <orderEntry type="library" name="commons.logging" level="project" />
   </component>
 </module>

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="commons.collections" type="repository">
+    <properties maven-id="commons-collections:commons-collections:LATEST" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/commons-collections/commons-collections/20040616/commons-collections-20040616.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

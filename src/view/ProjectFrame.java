@@ -75,7 +75,6 @@ public class ProjectFrame extends JFrame {
         });
 
         documentButton.addActionListener(event -> {
-            dispose();
             new DocumentsView(project);
         });
         backButton.addActionListener(event -> dispose());

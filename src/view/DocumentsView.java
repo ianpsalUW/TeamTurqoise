@@ -18,7 +18,6 @@ public class DocumentsView extends JFrame implements DocumentAddedListener{
 
         setTitle("Documents View");
         setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         // Create main panel
