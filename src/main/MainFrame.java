@@ -53,7 +53,13 @@ public class MainFrame {
 
 
     public MainFrame() {
-        frame = new JFrame("Project Pro v0.3");
+        about = new About();
+        about.add("Jordan Festin - \"zzz\"");
+        about.add("Bill Lactaoen - \"suffering\"");
+        about.add("Christian Pineda - \"Hungry rn\"");
+        about.add("Ian Salsich - \":)\"");
+
+        frame = new JFrame("Project Pro v" + about.getVersion());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700, 500);
         frame.getContentPane().setBackground(new Color(64, 224, 208));
@@ -75,12 +81,6 @@ public class MainFrame {
                 new Budget(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN))))));
 
         userDB = new UserDB();
-
-        about = new About();
-        about.add("Jordan Festin - \"zzz\"");
-        about.add("Bill Lactaoen - \"suffering\"");
-        about.add("Christian Pineda - \"Hungry rn\"");
-        about.add("Ian Salsich - \":)\"");
 
         frame.add(createMainPanel());
         addListeners();
