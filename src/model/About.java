@@ -15,7 +15,7 @@ public class About {
     /**
      * Instance field which contains the current version number.
      */
-    private static final double VERSION_NUMBER = 0.3;
+    private static final double VERSION_NUMBER = 0.5;
 
     /**
      * Instance field which contains a list to store developer names.
