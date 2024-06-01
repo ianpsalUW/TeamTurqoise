@@ -33,7 +33,7 @@ public class MainFrame {
      */
     private JButton aboutButton;
 
-    private JButton chooseProjectButton;
+    private static JButton chooseProjectButton;
     private final List<ProjectFolder> folders;
 
     /**
@@ -106,7 +106,7 @@ public class MainFrame {
         chooseProjectButton = new JButton("Choose a Project");
         chooseProjectButton.setMinimumSize(new Dimension(450, 50));
         chooseProjectButton.setMaximumSize(new Dimension(450, 50));
-        //chooseProjectButton.setEnabled(false);
+        chooseProjectButton.setEnabled(false);
 
         aboutButton = new JButton("About");
         aboutButton.setMinimumSize(new Dimension(450, 50));
@@ -139,6 +139,7 @@ public class MainFrame {
      */
     static void setCurrentUser(final User theUser) {
         currentUser = theUser;
+        chooseProjectButton.setEnabled(true);
     }
 
     public static void main(String[] args) {

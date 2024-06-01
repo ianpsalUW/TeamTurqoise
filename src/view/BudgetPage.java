@@ -19,6 +19,7 @@ public class BudgetPage extends JFrame {
     private final JButton viewSpending;
     private final JButton addSpending;
     private final JButton backButton;
+    private final JLabel remainingLabel;
 
     public BudgetPage(Project project) {
         this.project = project;
@@ -54,7 +55,19 @@ public class BudgetPage extends JFrame {
         currentAmtLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         currentAmtLabel.setFont(new Font("Dialog", Font.BOLD, 20));
         mainPanel.add(currentAmtLabel);
-        mainPanel.add(Box.createRigidArea(new Dimension(10, 25)));
+        mainPanel.add(Box.createRigidArea(new Dimension(10, 20)));
+
+        BigDecimal remaining =
+                project.getBudget().getBudget().subtract(project.getSpending().getTotal());
+        if (remaining.compareTo(BigDecimal.ZERO) < 0) {
+            remainingLabel = new JLabel("Remaining Budget: -$" + remaining.abs());
+        } else {
+            remainingLabel = new JLabel("Remaining Budget: $" + remaining);
+        }
+        remainingLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        remainingLabel.setFont(new Font("Dialog", Font.BOLD, 20));
+        mainPanel.add(remainingLabel);
+        mainPanel.add(Box.createRigidArea(new Dimension(10, 30)));
 
         viewSpending = new JButton("View Expenditure List");
         viewSpending.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -90,7 +103,8 @@ public class BudgetPage extends JFrame {
             String input = JOptionPane.showInputDialog("Enter new budget:");
             BigDecimal newTotal = new BigDecimal(input);
             project.getBudget().setBudget(newTotal);
-            totalLabel.setText("Total Budget: $" + project.getBudget().getBudget());
+
+            updateBudgetDisplay();
         });
 
         viewSpending.addActionListener(event -> displayExpenditures());
@@ -161,7 +175,8 @@ public class BudgetPage extends JFrame {
                     cost.setPrice(newCost);
                     BigDecimal newCurrent2 = newCurrent1.add(cost.getPrice());
                     project.getSpending().setTotal(newCurrent2);
-                    currentAmtLabel.setText("Current Spending: $" + project.getSpending().getTotal());
+
+                    updateBudgetDisplay();
                     costFrame.dispose();
                 }
             } else if (selection == 1) {
@@ -173,8 +188,8 @@ public class BudgetPage extends JFrame {
 
                     BigDecimal newCurrent = project.getSpending().getTotal().subtract(cost.getPrice());
                     project.getSpending().setTotal(newCurrent);
-                    currentAmtLabel.setText("Current Spending: $"
-                            + project.getSpending().getTotal());
+
+                    updateBudgetDisplay();
                     costFrame.dispose();
                 }
             }
@@ -200,7 +215,21 @@ public class BudgetPage extends JFrame {
             Purchase newSpending = new Purchase(enterName.getText(), newCost, date.format(format));
 
             project.getSpending().addPurchase(newSpending);
-            currentAmtLabel.setText("Current Spending: $" + project.getSpending().getTotal());
+            updateBudgetDisplay();
+        }
+    }
+
+    private void updateBudgetDisplay() {
+        totalLabel.setText("Total Budget: $" + project.getBudget().getBudget());
+        currentAmtLabel.setText("Current Spending: $" + project.getSpending().getTotal());
+
+        BigDecimal remaining =
+                project.getBudget().getBudget().subtract(project.getSpending().getTotal());
+
+        if (remaining.compareTo(BigDecimal.ZERO) < 0) {
+            remainingLabel.setText("Remaining Budget: -$" + remaining.abs());
+        } else {
+            remainingLabel.setText("Remaining Budget: $" + remaining);
         }
     }
 }
