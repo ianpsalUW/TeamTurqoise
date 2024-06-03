@@ -13,6 +13,8 @@ public class Project {
     Budget myBudget;
     Spending mySpending;
 
+    Notes myNotes;
+
     boolean myPrivacy = false;
 
     ArrayList<DocumentAddedListener> myDocumentAddedListeners;

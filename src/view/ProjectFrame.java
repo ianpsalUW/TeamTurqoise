@@ -77,6 +77,10 @@ public class ProjectFrame extends JFrame {
         documentButton.addActionListener(event -> {
             new DocumentsView(project);
         });
+
+        notesButton.addActionListener(event -> {
+            new NotesPage(project);
+        });
         backButton.addActionListener(event -> dispose());
     }
 }
