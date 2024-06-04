@@ -19,6 +19,8 @@ public class Project {
 
     ArrayList<DocumentAddedListener> myDocumentAddedListeners;
 
+    Changelog myChangelog;
+
     public Project() {
 
     }
@@ -29,6 +31,7 @@ public class Project {
         myBudget = theBudget;
         mySpending = new Spending();
         myDocumentAddedListeners = new ArrayList<>();
+        myChangelog = new Changelog();
     }
 
     public ArrayList<Document> getDocuments() {
@@ -61,6 +64,10 @@ public class Project {
 
     public String getName() {
         return myProjectName;
+    }
+
+    public Changelog getChangelog() {
+        return myChangelog;
     }
 
     public void addDocumentAddedListener(DocumentAddedListener listener) {

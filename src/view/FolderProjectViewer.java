@@ -58,7 +58,10 @@ public class FolderProjectViewer {
         addFolder.setMaximumSize(new Dimension(150, 35));
         addFolder.addActionListener(event -> {
             String input = JOptionPane.showInputDialog("Enter name of new folder:");
-            folders.add(new ProjectFolder(input, new ArrayList<>()));
+            if (input != null) {
+                folders.add(new ProjectFolder(input, new ArrayList<>()));
+            }
+
             displayFolders();
         });
         mainPanel.add(addFolder);
@@ -86,8 +89,13 @@ public class FolderProjectViewer {
         addProject.setMaximumSize(new Dimension(150, 35));
         addProject.addActionListener(event -> {
             String input = JOptionPane.showInputDialog("Enter name of new project:");
-            folder.addProject(new Project(input, false,
-                    new Budget(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN))));
+            if (input != null) {
+                Project newProject = new Project(input, false,
+                        new Budget(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN)));
+                folder.addProject(newProject);
+                newProject.getChangelog().projectCreated(input);
+            }
+
             displayProjects(folder);
         });
         mainPanel.add(addProject);

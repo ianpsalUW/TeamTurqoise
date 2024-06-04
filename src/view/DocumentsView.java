@@ -87,6 +87,7 @@ public class DocumentsView extends JFrame implements DocumentAddedListener{
             }
         });
         myDocumentsPanel.add(documentButton);
+        myProject.getChangelog().documentAdded(document.getFileName());
         revalidate();
         repaint();
     }

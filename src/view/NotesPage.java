@@ -3,7 +3,6 @@ package view;
 import model.Project;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -25,7 +24,7 @@ public class NotesPage extends JFrame implements ActionListener {
         //Window
         myNotes = new JFrame("Notes");
         myNotes.setSize(700, 500);
-        myNotes.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        myNotes.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         //Text area
         myTextArea = new JTextArea();
@@ -80,8 +79,8 @@ public class NotesPage extends JFrame implements ActionListener {
         switch(command) {
             case "New": myNotesFile.newFile(); break;
             case "Open": myNotesFile.open(); break;
-            case "Save": myNotesFile.save(); break;
-            case "SaveAs": myNotesFile.saveAs(); break;
+            case "Save": myNotesFile.save(); myProject.getChangelog().notesEdited(myNotesFile.myFileName); break;
+            case "SaveAs": myNotesFile.saveAs(); myProject.getChangelog().notesCreated(myNotesFile.myFileName); break;
             case "Exit": myNotesFile.exit(); break;
         }
     }

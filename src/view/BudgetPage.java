@@ -103,6 +103,7 @@ public class BudgetPage extends JFrame {
             String input = JOptionPane.showInputDialog("Enter new budget:");
             BigDecimal newTotal = new BigDecimal(input);
             project.getBudget().setBudget(newTotal);
+            project.getChangelog().budgetEdited();
 
             updateBudgetDisplay();
         });
@@ -176,6 +177,7 @@ public class BudgetPage extends JFrame {
                     BigDecimal newCurrent2 = newCurrent1.add(cost.getPrice());
                     project.getSpending().setTotal(newCurrent2);
 
+                    project.getChangelog().purchaseEdited(enterName.getText());
                     updateBudgetDisplay();
                     costFrame.dispose();
                 }
@@ -189,6 +191,7 @@ public class BudgetPage extends JFrame {
                     BigDecimal newCurrent = project.getSpending().getTotal().subtract(cost.getPrice());
                     project.getSpending().setTotal(newCurrent);
 
+                    project.getChangelog().purchaseRemoved(cost.getName());
                     updateBudgetDisplay();
                     costFrame.dispose();
                 }
@@ -215,6 +218,7 @@ public class BudgetPage extends JFrame {
             Purchase newSpending = new Purchase(enterName.getText(), newCost, date.format(format));
 
             project.getSpending().addPurchase(newSpending);
+            project.getChangelog().purchasedItem(enterName.getText());
             updateBudgetDisplay();
         }
     }

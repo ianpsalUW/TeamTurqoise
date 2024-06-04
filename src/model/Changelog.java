@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Changelog {
 
     public ArrayList<Log> myChangeLog;
-    public void ChangeLog() { myChangeLog = new ArrayList<>();  }
+    public Changelog() { myChangeLog = new ArrayList<>();  }
 
     public void budgetEdited() {
         myChangeLog.add(new Log("Budget", "edited"));
