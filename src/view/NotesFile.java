@@ -11,6 +11,7 @@ public class NotesFile {
     String myFileName;
     String myFileAddress;
 
+
     public NotesFile(NotesPage theNotesPage) {
         this.myNotesPage = theNotesPage;
     }

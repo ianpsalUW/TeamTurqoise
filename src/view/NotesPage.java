@@ -18,7 +18,7 @@ public class NotesPage extends JFrame implements ActionListener {
     JMenuItem myNew, myOpen, mySave, mySaveAs, myExit;
     NotesFile myNotesFile = new NotesFile(this);
 
-    // The constructor used by the application.
+    // The constructor used by the application
     public NotesPage(Project theProject) {
         this.myProject = theProject;
 
