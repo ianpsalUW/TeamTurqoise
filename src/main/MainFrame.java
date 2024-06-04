@@ -13,8 +13,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * A basic GUI with an About screen and a screen to
- * enter in your first name and email address.
+ * The main JFrame which displays "login",
+ * "open projects", and "about" features.
  *
  * @version JDK 21.0
  * @author Jordan Festin, Bill Lactaoen, Christian Pineda, Ian Salsich
@@ -22,9 +22,13 @@ import java.util.List;
 
 public class MainFrame {
 
-    private final JFrame frame;
     /**
-     * Instance field of the GUI's Login/Register button.
+     * Instance field of the GUI frame.
+     */
+    private final JFrame frame;
+
+    /**
+     * Instance field of the GUI's Login button.
      */
     private JButton loginButton;
 
@@ -33,7 +37,14 @@ public class MainFrame {
      */
     private JButton aboutButton;
 
+    /**
+     * Instance field of the GUI's "Choose a Project" button.
+     */
     private static JButton chooseProjectButton;
+
+    /**
+     * Instance field of the list of Project Folders.
+     */
     private final List<ProjectFolder> folders;
 
     /**
@@ -52,6 +63,9 @@ public class MainFrame {
     private final About about;
 
 
+    /**
+     * Default constructor which initializes GUI features.
+     */
     public MainFrame() {
         about = new About();
         about.add("Jordan Festin - \"zzz\"");
@@ -88,9 +102,9 @@ public class MainFrame {
 
     /**
      * Creates the panel containing the buttons
-     * for Login/Register and About Page.
+     * for Login, Project Viewer, and About Page.
      *
-     * @return a JPanel with Login/Register and About buttons
+     * @return a JPanel with Login/Register, Project Viewer, and About buttons
      */
     public JPanel createMainPanel() {
         JPanel mainPanel = new JPanel();
@@ -122,7 +136,7 @@ public class MainFrame {
     }
 
     /**
-     * Adds actions to the Login/Register and About Page buttons.
+     * Adds actions to the Login, Choose Project, and About Page buttons.
      */
     private void addListeners() {
         loginButton.addActionListener(event -> new LogInFrame(userDB));
@@ -142,6 +156,11 @@ public class MainFrame {
         chooseProjectButton.setEnabled(true);
     }
 
+    /**
+     * Runs the application.
+     *
+     * @param args the args
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(MainFrame::new);
     }

@@ -10,17 +10,63 @@ import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * BudgetPage displays a Project's budget, current amount
+ * spent and list of expenditures which can be added,
+ * edited, and deleted as needed.
+ *
+ * @version JDK 21.0
+ * @author Christian Pineda
+ */
+
 public class BudgetPage extends JFrame {
 
+    /**
+     * Instance field of the current project being examined.
+     */
     private final Project project;
+
+    /**
+     * Instance field of the total budget displayed.
+     */
     private final JLabel totalLabel;
+
+    /**
+     * Instance field of the Edit Budget button.
+     */
     private final JButton editTotalButton;
+
+    /**
+     * Instance field of the current amount spent displayed.
+     */
     private final JLabel currentAmtLabel;
+
+    /**
+     * Instance field of the View Expenditures button.
+     */
     private final JButton viewSpending;
+
+    /**
+     * Instance field of the Add Expenditure button.
+     */
     private final JButton addSpending;
+
+    /**
+     * Instance field of the back button.
+     */
     private final JButton backButton;
+
+    /**
+     * Instance field of the remaining budget displayed.
+     */
     private final JLabel remainingLabel;
 
+
+    /**
+     * Constructor which initializes the main JFrame.
+     *
+     * @param project the current project being examined
+     */
     public BudgetPage(Project project) {
         this.project = project;
 
@@ -98,6 +144,9 @@ public class BudgetPage extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Adds action listeners to the initialized JButtons.
+     */
     private void addListeners() {
         editTotalButton.addActionListener(event -> {
             String input = JOptionPane.showInputDialog("Enter new budget:");
@@ -118,6 +167,9 @@ public class BudgetPage extends JFrame {
         });
     }
 
+    /**
+     * Displays all expenditures of a project on a separate window.
+     */
     private void displayExpenditures() {
         JFrame costFrame = new JFrame("Expenditures");
         costFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -145,6 +197,13 @@ public class BudgetPage extends JFrame {
         costFrame.setVisible(true);
     }
 
+    /**
+     * Initializes the options of all expenditures.
+     *
+     * @param cost the expenditure
+     * @param costFrame the frame which displays all expenditures
+     * @return an initialized JButton for the given expenditure
+     */
     private JButton getCostButton(Purchase cost, JFrame costFrame) {
         JButton costButton = new JButton();
         costButton.setText(cost.getName() + "    |    $" +
@@ -200,6 +259,9 @@ public class BudgetPage extends JFrame {
         return costButton;
     }
 
+    /**
+     * Goes through the process of adding a new expenditure.
+     */
     private void displayAdding() {
         JTextField enterName = new JTextField();
         JTextField enterCost = new JTextField();
@@ -223,6 +285,9 @@ public class BudgetPage extends JFrame {
         }
     }
 
+    /**
+     * Updates the BudgetPage's total budget, current amount spent, and remaining budget.
+     */
     private void updateBudgetDisplay() {
         totalLabel.setText("Total Budget: $" + project.getBudget().getBudget());
         currentAmtLabel.setText("Current Spending: $" + project.getSpending().getTotal());

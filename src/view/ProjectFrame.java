@@ -5,15 +5,52 @@ import model.Project;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * ProjectFrame displays the documents, budget,
+ * notes, and changelog of a given project.
+ *
+ * @version JDK 21.0
+ * @author Bill Lactaoen, Christian Pineda, Ian Salsich
+ */
+
 public class ProjectFrame extends JFrame {
 
+    /**
+     * Instance field of the current project being examined.
+     */
     private final Project project;
+
+    /**
+     * Instance field of the GUI's documents button.
+     */
     private final JButton documentButton;
+
+    /**
+     * Instance field of the GUI's budget button.
+     */
     private final JButton budgetButton;
+
+    /**
+     * Instance field of the GUI's notes button.
+     */
     private final JButton notesButton;
+
+    /**
+     * Instance field of the GUI's changelog button.
+     */
     private final JButton changelogButton;
+
+    /**
+     * Instance field of the back button.
+     */
     private final JButton backButton;
 
+
+    /**
+     * Constructor which initializes the main GUI.
+     *
+     * @param project the project being examined
+     */
     public ProjectFrame(Project project) {
         this.project = project;
 
@@ -68,6 +105,9 @@ public class ProjectFrame extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Adds action listeners to the GUI's JButtons.
+     */
     private void addListeners() {
         budgetButton.addActionListener(event -> {
             dispose();

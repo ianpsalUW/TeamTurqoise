@@ -11,12 +11,36 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * FolderProjectViewer displays all Projects and
+ * ProjectFolders, allowing the adding of both.
+ *
+ * @version JDK 21.0
+ * @author Christian Pineda
+ */
+
 public class FolderProjectViewer {
 
+    /**
+     * Instance field of the class' main frame.
+     */
     private final JFrame frame;
+
+    /**
+     * Instance field of the class' main panel.
+     */
     private final JPanel mainPanel;
+
+    /**
+     * Instance field of the list of ProjectFolder objects.
+     */
     private final List<ProjectFolder> folders;
 
+    /**
+     * Constructor which initializes the main JFrame.
+     *
+     * @param folders the list of ProjectFolders
+     */
     public FolderProjectViewer(List<ProjectFolder> folders) {
         this.folders = folders;
 
@@ -41,6 +65,9 @@ public class FolderProjectViewer {
         frame.setVisible(true);
     }
 
+    /**
+     * Displays all project folders.
+     */
     private void displayFolders() {
         mainPanel.removeAll();
         for (ProjectFolder folder : folders) {
@@ -70,6 +97,11 @@ public class FolderProjectViewer {
         mainPanel.repaint();
     }
 
+    /**
+     * Displays all projects of a project folder
+     *
+     * @param folder the chosen project folder
+     */
     private void displayProjects(ProjectFolder folder) {
         mainPanel.removeAll();
         for (Project project : folder.getProjectList()) {

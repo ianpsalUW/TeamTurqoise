@@ -6,11 +6,32 @@ import model.Project;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * ChangelogFrame displays all
+ * changes made on a project.
+ *
+ * @version JDK 21.0
+ * @author Christian Pineda
+ */
+
 public class ChangelogFrame extends JFrame {
 
+    /**
+     * Instance field of the current project being examined.
+     */
     private final Project project;
+
+    /**
+     * Instance field of the changelog's main panel.
+     */
     private final JPanel mainPanel;
 
+
+    /**
+     * Constructor which initializes the main JFrame.
+     *
+     * @param project the project being examined
+     */
     public ChangelogFrame(Project project) {
         this.project = project;
 
@@ -33,6 +54,9 @@ public class ChangelogFrame extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Displays all changes made on the project.
+     */
     private void displayLogs() {
         mainPanel.removeAll();
         if (project.getChangelog().getChangeLog() != null) {
