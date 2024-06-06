@@ -80,6 +80,11 @@ public class UserDB implements Serializable {
         return null; // User not found
     }
 
+    /**
+     * Returns the UserDB as a String object.
+     *
+     * @return String
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder();
         String prefix = "";
@@ -105,6 +110,11 @@ public class UserDB implements Serializable {
         }
     }
 
+    /**
+     * Exports the UserDB given a file location.
+     *
+     * @param fileLocation a String
+     */
     public void exportUserDB(String fileLocation) {
         ObjectOutputStream oos = null;
         FileOutputStream fout = null;
@@ -120,6 +130,11 @@ public class UserDB implements Serializable {
         }
     }
 
+    /**
+     * Returns a list of Users from a file.
+     *
+     * @return a List of User objects.
+     */
     private List<User> getUsersByFile() {
         List<User> result = new ArrayList<>();
         File outputFile = new File(myFilePath);
@@ -144,6 +159,9 @@ public class UserDB implements Serializable {
         return result;
     }
 
+    /**
+     * Writes the database to a file.
+     */
     public void writeDBToFile() {
         File outputFile = new File(myFilePath);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {

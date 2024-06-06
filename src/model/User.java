@@ -87,6 +87,11 @@ public class User implements Serializable {
         return myEmail;
     }
 
+    /**
+     * Returns the user as a String object.
+     *
+     * @return a String
+     */
     @Override
     public String toString() { return myName + "\n" + myEmail; }
 

@@ -2,8 +2,23 @@ package model;
 
 import java.io.*;
 
+/**
+ * ImportFile contains the process of importing
+ * a file to a given directory path.
+ *
+ * @version JDK 21.0
+ * @author Bill Lactaoen
+ */
+
 public class ImportFile {
 
+    /**
+     * Copies a file given paths for the source
+     * file and the destination folder.
+     *
+     * @param sourceFilePath a String containing the path of the source file
+     * @param destinationFolderPath a String containing the path of the destination folder
+     */
     public static void copyFile(String sourceFilePath, String destinationFolderPath) throws IOException {
         File sourceFile = new File(sourceFilePath);
         File destinationFolder = new File(destinationFolderPath);

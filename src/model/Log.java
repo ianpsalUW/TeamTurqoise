@@ -98,6 +98,11 @@ public class Log {
         return myTime;
     }
 
+    /**
+     * Returns the log as a String object.
+     *
+     * @return a String
+     */
     @Override
     public String toString() {
         return myItem + "\n"

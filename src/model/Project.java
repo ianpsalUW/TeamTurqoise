@@ -6,28 +6,72 @@ import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Project contains the documents, budget,
+ * and changelog associated with it.
+ *
+ * @version JDK 21.0
+ * @author Bill Lactaoen, Christian Pineda, Ian Salsich
+ */
+
 public class Project {
 
+    /**
+     * The Project's list of documents.
+     */
     ArrayList<Document> myDocumentList;
 
+    /**
+     * The Project's name.
+     */
     String myProjectName = "Default name";
 
+    /**
+     * The Project's budget.
+     */
     Budget myBudget;
+
+    /**
+     * The Project's list of expenditures.
+     */
     Spending mySpending;
 
-    Notes myNotes;
-
+    /**
+     * The Project's privacy attribute.
+     */
     boolean myPrivacy = false;
 
+    /**
+     * The Project's listener for documents being added.
+     */
     ArrayList<DocumentAddedListener> myDocumentAddedListeners;
 
+    /**
+     * The Project's changelog.
+     */
     Changelog myChangelog;
 
+    /**
+     * The Project's folder on which it is located at.
+     */
     ProjectFolder myFolder;
 
+    /**
+     * The Project's directory on which it is located at.
+     */
     String myDirectory;
 
 
+    /**
+     * Constructor which initializes the Project object
+     * given a name, the privacy, a Budget object,
+     * and its project folder.
+     *
+     * @param theProjectName a String
+     * @param thePrivacy a Boolean
+     * @param theBudget a Budget object
+     * @param theProjectFolder a ProjectFolder object
+     */
     public Project(String theProjectName, boolean thePrivacy, Budget theBudget, ProjectFolder theProjectFolder) {
         myFolder = theProjectFolder;
         myDirectory = myFolder.getMyDirectory() + File.separator + theProjectName;
@@ -41,10 +85,21 @@ public class Project {
         myChangelog = new Changelog(this);
     }
 
+    /**
+     * Returns the Project's list of documents.
+     *
+     * @return an ArrayList
+     */
     public ArrayList<Document> getDocuments() {
         return myDocumentList;
     }
 
+    /**
+     * Adds a document.
+     *
+     * @param theDocument the Document being added
+     * @return a Boolean
+     */
     public boolean addDocument(Document theDocument) {
         if (myDocumentList.contains(theDocument)) {
             return false;
@@ -54,6 +109,12 @@ public class Project {
         return true;
     }
 
+    /**
+     * Removes a document.
+     *
+     * @param theDocument the Document being removed
+     * @return the Document being removed
+     */
     public Document removeDocument(Document theDocument) throws Exception {
         if (!myDocumentList.contains(theDocument)) {
             throw new Exception("Document not found.");
@@ -65,34 +126,72 @@ public class Project {
         }
     }
 
+    /**
+     * Returns the Project's budget.
+     *
+     * @return a Budget object
+     */
     public Budget getBudget() {
         return myBudget;
     }
 
+    /**
+     * Returns the Project's list of expenditures.
+     *
+     * @return a Spending object
+     */
     public Spending getSpending() {
         return mySpending;
     }
 
+    /**
+     * Returns the Project's name.
+     *
+     * @return a String
+     */
     public String getName() {
         return myProjectName;
     }
 
+    /**
+     * Returns the Project's changelog.
+     *
+     * @return a Changelog object
+     */
     public Changelog getChangelog() {
         return myChangelog;
     }
 
+    /**
+     * Returns the Project's directory.
+     *
+     * @return a String
+     */
     public String getMyDirectory() {return myDirectory;}
 
+    /**
+     * Adds a DocumentAddedListener.
+     *
+     * @param listener the listener
+     */
     public void addDocumentAddedListener(DocumentAddedListener listener) {
         myDocumentAddedListeners.add(listener);
     }
 
+    /**
+     * Notifies all DocumentAddedListeners.
+     *
+     * @param document a Document object.
+     */
     private void notifyDocumentAddedListeners(Document document) {
         for (DocumentAddedListener listener : myDocumentAddedListeners) {
             listener.documentAdded(document);
         }
     }
 
+    /**
+     * Writes documents to a file.
+     */
     public void writeDocuments() {
         String docDir = myDirectory + File.separator + "documents";
         File filePath = new File(docDir, "documents.txt");
@@ -110,6 +209,11 @@ public class Project {
         }
     }
 
+    /**
+     * Reads documents from a file.
+     *
+     * @return an ArrayList of Document objects
+     */
     private ArrayList<Document> readDocuments() {
         String docDir = myDirectory + File.separator + "documents";
         File filePath = new File(docDir, "documents.txt");
@@ -129,6 +233,9 @@ public class Project {
         return result;
     }
 
+    /**
+     * Creates a directory.
+     */
     private void createDir() {
         File directory = new File(myDirectory);
         File docDir = new File(myDirectory, "documents");
@@ -146,6 +253,12 @@ public class Project {
             }
         }
     }
+
+    /**
+     * Returns the Project as a String object.
+     *
+     * @return a String
+     */
     @Override
     public String toString(){
         return myProjectName + '\n'

@@ -6,27 +6,60 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * ProjectFolder contains all Projects within a folder.
+ *
+ * @version JDK 21.0
+ * @author Bill Lactaoen, Ian Salsich
+ */
+
 public class ProjectFolder {
 
+    /**
+     * The ProjectFolder's list of Project objects.
+     */
     List<Project> myProjectList;
 
+    /**
+     * The ProjectFolder's name.
+     */
     String myProjectFolderName = "Default name";
 
+    /**
+     * The ProjectFolder's directory.
+     */
     private String myDirectory =
             System.getProperty("user.home") + File.separator + "Documents" + File.separator + "Project_Pro";
 
+    /**
+     * Constructor which initializes a ProjectFolder given a name.
+     *
+     * @param theProjectFolderName a String
+     */
     public ProjectFolder(final String theProjectFolderName) {
         myProjectFolderName = theProjectFolderName;
         myDirectory += File.separator + myProjectFolderName;
         myProjectList = readProjects();
         createDirectory();
     }
+
+    /**
+     * Constructor which initializes a ProjectFolder given a list of Project objects.
+     * @param projects a List of Project objects
+     */
     public ProjectFolder(List<Project> projects) {
         myProjectList = projects;
         myDirectory += File.separator + myProjectFolderName;
         createDirectory();
     }
 
+    /**
+     * Constructor which initializes a ProjectFolder given
+     * a name and a list of Project objects.
+     *
+     * @param theProjectFolderName a String
+     * @param projects a List of Project objects
+     */
     public ProjectFolder(String theProjectFolderName, List<Project> projects) {
         myProjectFolderName = theProjectFolderName;
         myProjectList = projects;
@@ -34,20 +67,31 @@ public class ProjectFolder {
         createDirectory();
     }
 
+    /**
+     * Returns the ProjectFolder's list of projects.
+     *
+     * @return a List of Project objects
+     */
     public List<Project> getProjectList() {
         return myProjectList;
     }
 
+    /**
+     * Returns the ProjectFolder's name.
+     *
+     * @return a String
+     */
     public String getName() {
         return myProjectFolderName;
     }
 
+    /**
+     * Adds a project.
+     *
+     * @param project a Project object
+     */
     public void addProject(Project project) {
         myProjectList.add(project);
-    }
-
-    public List<Project> getMyProjectList() {
-        return myProjectList;
     }
 
     /**
@@ -63,10 +107,20 @@ public class ProjectFolder {
         }
     }
 
+    /**
+     * Returns the ProjectFolder's directory.
+     *
+     * @return a String
+     */
     public String getMyDirectory() {
         return myDirectory;
     }
 
+    /**
+     * Reads projects from a file.
+     *
+     * @return a List of Project objects
+     */
     private List<Project> readProjects() {
         List<Project> result = new ArrayList<>();
         File projectsFile = new File(myDirectory, "projects.txt");
@@ -115,6 +169,9 @@ public class ProjectFolder {
         return result;
     }
 
+    /**
+     * Writes projects onto a file.
+     */
     public void writeProjects() {
         File projectsFile = new File(myDirectory, "projects.txt");
 
@@ -129,6 +186,11 @@ public class ProjectFolder {
         }
     }
 
+    /**
+     * Returns the ProjectFolder as a String object.
+     *
+     * @return a String
+     */
     @Override
     public String toString() {
         return myProjectFolderName;

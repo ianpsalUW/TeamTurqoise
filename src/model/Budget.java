@@ -33,7 +33,7 @@ public class Budget {
     public void setBudget(BigDecimal theBudget){ myBudget = theBudget.setScale(2, RoundingMode.HALF_EVEN); }
 
     /**
-     * recieves the value of the budget
+     * receives the value of the budget
      *
      * @return BigDecimal
      */
@@ -48,6 +48,11 @@ public class Budget {
      */
     public boolean checkBudget(BigDecimal theValue) { return (myBudget.compareTo(theValue) <= 0);}
 
+    /**
+     * Returns the budget as a String object.
+     *
+     * @return String
+     */
     @Override
     public String toString(){
         return myBudget.toString();
