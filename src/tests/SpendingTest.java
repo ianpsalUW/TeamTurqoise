@@ -1,7 +1,6 @@
 package tests;
 
-import model.Purchase;
-import model.Spending;
+import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +12,7 @@ public class SpendingTest {
     private Spending myPDB;
 
     @BeforeEach
-    public void setup(){ myPDB = new Spending();
+    public void setup(){ myPDB = new Spending(new Project("dog",false, new Budget(new BigDecimal(0)), new ProjectFolder("dog")));
         myPDB.addPurchase(new Purchase("Burrito", BigDecimal.valueOf(3.99), "5/27/2024"));
         myPDB.addPurchase(new Purchase("Pepsi", BigDecimal.valueOf(3.99), "5/27/2024"));
         myPDB.addPurchase(new Purchase("Quesadilla", BigDecimal.valueOf(5.99), "5/27/2024"));

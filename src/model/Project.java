@@ -36,9 +36,9 @@ public class Project {
         myProjectName = theProjectName;
         myPrivacy = thePrivacy;
         myBudget = theBudget;
-        mySpending = new Spending();
+        mySpending = new Spending(this);
         myDocumentAddedListeners = new ArrayList<>();
-        myChangelog = new Changelog();
+        myChangelog = new Changelog(this);
     }
 
     public ArrayList<Document> getDocuments() {
@@ -94,7 +94,8 @@ public class Project {
     }
 
     public void writeDocuments() {
-        File filePath = new File(myDirectory, "documents.txt");
+        String docDir = myDirectory + File.separator + "documents";
+        File filePath = new File(docDir, "documents.txt");
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Document document : myDocumentList) {
@@ -110,7 +111,9 @@ public class Project {
     }
 
     private ArrayList<Document> readDocuments() {
-        File filePath = new File(myDirectory, "documents.txt");
+        String docDir = myDirectory + File.separator + "documents";
+        File filePath = new File(docDir, "documents.txt");
+
         ArrayList<Document> result = new ArrayList<>();
         if(filePath.exists()) {
             try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {

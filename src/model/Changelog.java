@@ -1,5 +1,7 @@
 package model;
 
+import javax.swing.*;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -17,9 +19,18 @@ public class Changelog {
     public ArrayList<Log> myChangeLog;
 
     /**
+     * Instance field for the file path
+     */
+    String myPath;
+
+    /**
      * Default constructor, initializes array list.
      */
-    public Changelog() { myChangeLog = new ArrayList<>();  }
+    public Changelog(final Project theProject) {
+        myPath = theProject.getMyDirectory() + File.separator + "changelog";
+        makeDir();
+        myChangeLog = readLog();
+    }
 
     /**
      * Adds a budget edited log entry to the changelog.
@@ -110,6 +121,61 @@ public class Changelog {
     }
 
 
+    /**
+     * This is the method to make the changelog directory for data permanence.
+     */
+
+    private void makeDir() {
+        File directory = new File(myPath);
+        if (!directory.exists()) {
+            if (!directory.mkdirs()) {
+                JOptionPane.showMessageDialog(null, "Failed to create application directory in Documents.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    /**
+     * Writes a file called changelog.txt
+     */
+
+    public void writeLog() {
+        File logPath = new File(myPath, "changelog.txt");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(logPath))) {
+            for (Log log : myChangeLog) {
+                writer.write(log.toString());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Failed to write changelog to file.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    /**
+     * Reads the changelog.txt file for changelog remembering
+     */
+
+    private ArrayList<Log> readLog() {
+        ArrayList<Log> changeLog = new ArrayList<>();
+        File logFile = new File(myPath, "changelog.txt");
+        if (logFile.exists()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(logFile))) {
+                String itemName, change, date, time;
+                while ((itemName = reader.readLine()) != null) {
+                    change = reader.readLine();
+                    date = reader.readLine();
+                    time = reader.readLine();
+                    changeLog.add(new Log(itemName, change, date, time));
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Failed to read changelog from file.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        return changeLog;
+    }
 
 
 }

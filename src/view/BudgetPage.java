@@ -231,10 +231,8 @@ public class BudgetPage extends JFrame {
                 if (option == JOptionPane.OK_OPTION) {
                     BigDecimal newCost = new BigDecimal(enterCost.getText());
                     cost.setName(enterName.getText());
-                    BigDecimal newCurrent1 = project.getSpending().getTotal().subtract(cost.getPrice());
                     cost.setPrice(newCost);
-                    BigDecimal newCurrent2 = newCurrent1.add(cost.getPrice());
-                    project.getSpending().setTotal(newCurrent2);
+                    project.getSpending().setTotal();
 
                     project.getChangelog().purchaseEdited(enterName.getText());
                     updateBudgetDisplay();
@@ -247,8 +245,7 @@ public class BudgetPage extends JFrame {
                 if (option == JOptionPane.YES_OPTION) {
                     project.getSpending().removePurchase(cost.getName());
 
-                    BigDecimal newCurrent = project.getSpending().getTotal().subtract(cost.getPrice());
-                    project.getSpending().setTotal(newCurrent);
+                    project.getSpending().setTotal();
 
                     project.getChangelog().purchaseRemoved(cost.getName());
                     updateBudgetDisplay();

@@ -93,15 +93,17 @@ public class MainFrame {
 
         frame.add(createMainPanel());
         addListeners();
+
+        // Run all the writetofile methods upon application close/
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             writeFoldersToFile();
             userDB.writeDBToFile();
             for (ProjectFolder folder : folders) {
                 folder.writeProjects();
-            }
-            for (ProjectFolder folder : folders) {
                 for (Project project : folder.getProjectList()) {
                     project.writeDocuments();
+                    project.getSpending().writePurchases();
+                    project.getChangelog().writeLog();
                 }
             }
         }));
@@ -220,6 +222,11 @@ public class MainFrame {
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    /**
+     * Reads the folders.txt file
+     * @return
+     */
 
     private static List<ProjectFolder> readFileToFolders() {
         List<ProjectFolder> folderList = new ArrayList<>();

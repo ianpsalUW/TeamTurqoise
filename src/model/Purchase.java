@@ -66,4 +66,11 @@ public class Purchase {
      * @return String
      */
     public String getDate() { return myDate; }
+
+    @Override
+    public String toString() {
+        return myName +"\n"
+                + myPrice + "\n"
+                + myDate;
+    }
 }

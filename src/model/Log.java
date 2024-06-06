@@ -52,6 +52,17 @@ public class Log {
     }
 
     /**
+     * Constructor for previous log objects, requires name, change, date, and time
+     */
+
+    public Log(String item, String change, String date, String time) {
+        myItem =item;
+        myChange = change;
+        myDate = date;
+        myTime = time;
+    }
+
+    /**
      * retrieves the date the item was altered.
      *
      * @return String
@@ -85,6 +96,14 @@ public class Log {
      */
     public String getTime() {
         return myTime;
+    }
+
+    @Override
+    public String toString() {
+        return myItem + "\n"
+                + myChange + "\n"
+                + myDate + "\n"
+                +myTime;
     }
 
 }
