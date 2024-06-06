@@ -1,7 +1,8 @@
 package model;
 
 import javax.swing.*;
-import java.io.File;
+import java.io.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,12 +69,64 @@ public class ProjectFolder {
 
     private List<Project> readProjects() {
         List<Project> result = new ArrayList<>();
-        File folderDir = new File(myDirectory);
-        if (folderDir.exists()) {
-            File projects = new File(myDirectory, "projects.txt");
+        File projectsFile = new File(myDirectory, "projects.txt");
 
+        if (projectsFile.exists()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(projectsFile))) {
+                String projectName;
+                while ((projectName = reader.readLine()) != null) {
+                    String privacyStr = reader.readLine();
+                    String budgetStr = reader.readLine();
+
+                    // Validate read data
+                    if (privacyStr == null || budgetStr == null) {
+                        JOptionPane.showMessageDialog(null, "Incomplete project data found in file.",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                        break; // Stop processing to avoid further errors
+                    }
+
+                    boolean privacy;
+                    try {
+                        privacy = Boolean.parseBoolean(privacyStr);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Invalid privacy format in project file.",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                        continue; // Skip this project and continue with the next
+                    }
+
+                    BigDecimal budget;
+                    try {
+                        budget = new BigDecimal(budgetStr);
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Invalid budget format in project file.",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                        continue; // Skip this project and continue with the next
+                    }
+
+                    Project project = new Project(projectName, privacy, new Budget(budget), this);
+                    result.add(project);
+                    reader.readLine();
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Failed to read projects from file.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         return result;
+    }
+
+    public void writeProjects() {
+        File projectsFile = new File(myDirectory, "projects.txt");
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(projectsFile))) {
+            for (Project project : myProjectList) {
+                writer.write(project.toString());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Failed to write projects to file.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     @Override

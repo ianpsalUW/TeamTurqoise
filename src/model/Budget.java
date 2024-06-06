@@ -47,4 +47,9 @@ public class Budget {
      * @return boolean
      */
     public boolean checkBudget(BigDecimal theValue) { return (myBudget.compareTo(theValue) <= 0);}
+
+    @Override
+    public String toString(){
+        return myBudget.toString();
+    }
 }

@@ -1,0 +1,25 @@
+<component name="ArtifactManager">
+  <artifact name="BasicGUI:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/BasicGUI_jar</output-path>
+    <root id="root">
+      <element id="archive" name="BasicGUI.jar">
+        <element id="module-output" name="BasicGUI" />
+      </element>
+      <element id="directory" name="lib">
+        <element id="library" level="module" name="JUnit5.8.1" module-name="BasicGUI" />
+        <element id="library" level="application" name="apache.commons.compress" />
+        <element id="library" level="project" name="apache.pdfbox" />
+        <element id="library" level="project" name="apache.pdfbox.fontbox" />
+        <element id="library" level="project" name="apache.poi" />
+        <element id="library" level="project" name="apache.poi.ooxml" />
+        <element id="library" level="project" name="apache.poi.ooxml.schemas" />
+        <element id="library" level="project" name="apache.tika.core" />
+        <element id="library" level="project" name="apache.tika.parsers.standard.package" />
+        <element id="library" level="project" name="apache.xmlbeans" />
+        <element id="library" level="project" name="commons.collections" />
+        <element id="library" level="project" name="commons.logging" />
+        <element id="library" level="project" name="junit.jupiter" />
+      </element>
+    </root>
+  </artifact>
+</component>

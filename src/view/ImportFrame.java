@@ -24,8 +24,8 @@ public class ImportFrame extends JFrame {
         myFilePathTextField = new JTextField();
         myFilePathTextField.setEditable(false);
 
-        myDestinationTextField = new JTextField();
-        myDestinationTextField.setEditable(true);
+        myDestinationTextField = new JTextField(project.getMyDirectory() + File.separator + "documents");
+        myDestinationTextField.setEditable(false);
 
         JButton myBrowseButton = new JButton("Browse");
         myBrowseButton.addActionListener(new ActionListener() {
@@ -50,13 +50,17 @@ public class ImportFrame extends JFrame {
                         File sfile = new File(sourceFilePath);
                         File file = new File(destinationFolderPath + File.separator + sfile.getName());
                         Document document = new Document(file.getPath(), file.getName());
-                        myProject.addDocument(document);
-                        JOptionPane.showMessageDialog(null, "File copied successfully.");
+                        if (myProject.addDocument(document)) {
+                            ImportFile.copyFile(sourceFilePath, destinationFolderPath);
+                            JOptionPane.showMessageDialog(ImportFrame.this, "File copied successfully.");
+                        } else {
+                            JOptionPane.showMessageDialog(ImportFrame.this, "Document already exists.");
+                        }
                     } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(null, "Error copying file: " + ex.getMessage());
+                        JOptionPane.showMessageDialog(ImportFrame.this, "Error copying file: " + ex.getMessage());
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Please fill in all fields.");
+                    JOptionPane.showMessageDialog(ImportFrame.this, "Please fill in all fields.");
                 }
             }
         });

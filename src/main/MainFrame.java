@@ -96,6 +96,14 @@ public class MainFrame {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             writeFoldersToFile();
             userDB.writeDBToFile();
+            for (ProjectFolder folder : folders) {
+                folder.writeProjects();
+            }
+            for (ProjectFolder folder : folders) {
+                for (Project project : folder.getProjectList()) {
+                    project.writeDocuments();
+                }
+            }
         }));
     }
 
