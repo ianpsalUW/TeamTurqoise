@@ -12,7 +12,7 @@ class UserDBTest {
     private UserDB usDB;
 
     @BeforeEach
-    public final void setup(){ usDB = new UserDB();
+    public final void setup(){ usDB = new UserDB("dog");
         usDB.addUser(new User("Bill", "BillsEmail@Email.com"));
         usDB.addUser(new User("Lola", "LolaEmail@Email.com"));
     }

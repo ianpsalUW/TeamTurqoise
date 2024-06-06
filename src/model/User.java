@@ -88,7 +88,7 @@ public class User implements Serializable {
     }
 
     @Override
-    public String toString() { return myName + " " + myEmail; }
+    public String toString() { return myName + "\n" + myEmail; }
 
     public void exportUser() {
         ObjectOutputStream oos = null;

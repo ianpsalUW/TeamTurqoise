@@ -1,7 +1,6 @@
 package model;
 
-import model.User;
-
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
@@ -27,12 +26,15 @@ public class UserDB implements Serializable {
 
     private final List<User> myUsers;
 
+    private String myFilePath = "";
+
     /**
      * This is the main constructor for a UserDB object.
      */
 
-    public UserDB() {
-        myUsers = new ArrayList<>();
+    public UserDB(String theFilePath) {
+        myFilePath += theFilePath + File.separator + "users.txt";
+        myUsers = getUsersByFile();
     }
 
     /**
@@ -41,7 +43,12 @@ public class UserDB implements Serializable {
      */
 
     public void addUser(User theUser) {
-        myUsers.add(theUser);
+        if (getUserByName(theUser.getName()) != null || getUserByEmail(theUser.getEmail()) != null) {
+            JOptionPane.showMessageDialog(null, "User already exists.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            myUsers.add(theUser);
+        }
     }
 
     /**
@@ -113,6 +120,41 @@ public class UserDB implements Serializable {
         }
     }
 
+    private List<User> getUsersByFile() {
+        List<User> result = new ArrayList<>();
+        File outputFile = new File(myFilePath);
+        if (outputFile.exists()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(outputFile))) {
+                String username;
+                String email;
+                User currentUser = null;
+                while((username = reader.readLine()) != null) {
+                    if((email = reader.readLine()) != null) {
+                        currentUser = new User(username, email);
+                        result.add(currentUser);
+                    }
 
+                }
+
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Failed to read folders from file.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        return result;
+    }
+
+    public void writeDBToFile() {
+        File outputFile = new File(myFilePath);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
+            for (User user : myUsers) {
+                writer.write(user.toString());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Failed to write user database to file.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
 }

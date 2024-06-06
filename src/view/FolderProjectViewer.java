@@ -123,7 +123,7 @@ public class FolderProjectViewer {
             String input = JOptionPane.showInputDialog("Enter name of new project:");
             if (input != null) {
                 Project newProject = new Project(input, false,
-                        new Budget(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN)));
+                        new Budget(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN)), folder);
                 folder.addProject(newProject);
                 newProject.getChangelog().projectCreated(input);
             }

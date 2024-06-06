@@ -21,17 +21,20 @@ public class Project {
 
     Changelog myChangelog;
 
+    ProjectFolder myFolder;
+
     public Project() {
 
     }
 
-    public Project(String theProjectName, boolean thePrivacy, Budget theBudget) {
+    public Project(String theProjectName, boolean thePrivacy, Budget theBudget, ProjectFolder theProjectFolder) {
         myProjectName = theProjectName;
         myPrivacy = thePrivacy;
         myBudget = theBudget;
         mySpending = new Spending();
         myDocumentAddedListeners = new ArrayList<>();
         myChangelog = new Changelog();
+        myFolder = theProjectFolder;
     }
 
     public ArrayList<Document> getDocuments() {
@@ -78,5 +81,13 @@ public class Project {
         for (DocumentAddedListener listener : myDocumentAddedListeners) {
             listener.documentAdded(document);
         }
+    }
+
+    @Override
+    public String toString(){
+        return myProjectName + '\n'
+                + myPrivacy + '\n'
+                + myBudget + '\n'
+                + myFolder;
     }
 }

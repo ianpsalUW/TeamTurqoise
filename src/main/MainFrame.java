@@ -3,13 +3,12 @@ package main;
 import model.*;
 import view.AboutFrame;
 import view.FolderProjectViewer;
+import model.UserDB;
 
 import javax.swing.*;
 import java.awt.*;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -45,7 +44,7 @@ public class MainFrame {
     /**
      * Instance field of the list of Project Folders.
      */
-    private final List<ProjectFolder> folders;
+    private static List<ProjectFolder> folders;
 
     /**
      * Instance field of the user database.
@@ -61,6 +60,12 @@ public class MainFrame {
      * Instance field of the About object.
      */
     private final About about;
+
+    /**
+     * Static field for the program directory.
+     */
+    private static final String myDirectory =
+            System.getProperty("user.home") + File.separator + "Documents" + File.separator + "Project_Pro";
 
 
     /**
@@ -82,22 +87,16 @@ public class MainFrame {
         frame.setVisible(true);
         frame.setResizable(false);
 
-        folders = new ArrayList<>();
-        folders.add(new ProjectFolder("Test Folder 1",
-                Arrays.asList(new Project("Test Project 1.1", false,
-                                new Budget(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN))),
-                        new Project("Test Project 1.2", false,
-                                new Budget(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN))))));
-        folders.add(new ProjectFolder("Test Folder 2",
-                Arrays.asList(new Project("Test Project 2.1", false,
-                new Budget(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN))),
-                        new Project("Test Project 2.2", false,
-                new Budget(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN))))));
+        folders = readFileToFolders();
 
-        userDB = new UserDB();
+        userDB = new UserDB(myDirectory + File.separator + "common");
 
         frame.add(createMainPanel());
         addListeners();
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            writeFoldersToFile();
+            userDB.writeDBToFile();
+        }));
     }
 
     /**
@@ -162,6 +161,76 @@ public class MainFrame {
      * @param args the args
      */
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(MainFrame::new);
+        if (makeDirectory()) {
+            SwingUtilities.invokeLater(MainFrame::new);
+        }
+    }
+
+    /**
+     * Makes the files for the application to save data locally.
+     *
+     * @return true if the directory was made successfully or was already made. False otherwise.
+     */
+
+    private static boolean makeDirectory() {
+        File appDirectory = new File(myDirectory);
+        File commonDirectory = new File(myDirectory, "common");
+        if (!appDirectory.exists()) {
+            if (appDirectory.mkdirs()) {
+                if (!commonDirectory.exists()) {
+                    if (commonDirectory.mkdirs()) {
+                        return true;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Failed to create common directory in Documents.",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                        return false;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Failed to create application directory in Documents.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Saves the contents of myFolders into a text file.
+     */
+
+    private static void writeFoldersToFile() {
+        String directory = myDirectory + File.separator + "common";
+        File foldersDir = new File(directory, "folders.txt");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(foldersDir))) {
+            for (ProjectFolder folder : folders) {
+                writer.write(folder.toString());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Failed to write folders to file.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private static List<ProjectFolder> readFileToFolders() {
+        List<ProjectFolder> folderList = new ArrayList<>();
+        String directory = myDirectory + File.separator + "common";
+        File file = new File(directory, "folders.txt");
+        if (file.exists()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                String line;
+                ProjectFolder currentFolder = null;
+                while((line = reader.readLine()) != null) {
+                    currentFolder = new ProjectFolder(line);
+                        folderList.add(currentFolder);
+                }
+
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Failed to read folders from file.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        return folderList;
     }
 }
