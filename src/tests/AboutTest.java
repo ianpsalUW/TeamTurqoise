@@ -26,7 +26,7 @@ class AboutTest {
 
     @Test
     public final void getVersionTest() {
-        assertEquals(0.1, about.getVersion());
+        assertEquals(0.5, about.getVersion());
     }
 
 }

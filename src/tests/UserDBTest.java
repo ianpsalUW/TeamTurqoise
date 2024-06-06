@@ -1,11 +1,11 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import model.User;
 import model.UserDB;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UserDBTest {
 
@@ -32,7 +32,7 @@ class UserDBTest {
     public final void getUserByEmailTest() { assertEquals("Lola", usDB.getUserByEmail("LolaEmail@Email.com").getName()); }
 
     @Test
-    public final void UserDBToStringTest() { assertEquals("Bill BillsEmail@Email.com\nLola LolaEmail@Email.com", usDB.toString()); }
+    public final void UserDBToStringTest() { assertEquals("Bill\nBillsEmail@Email.com\nLola\nLolaEmail@Email.com", usDB.toString()); }
 
 
 }

@@ -29,7 +29,7 @@ class UserTest {
     }
 
     @Test
-    public final void toStringTest() { assertEquals("John JSmith@yahoo.com", usTest.toString());}
+    public final void toStringTest() { assertEquals("John\nJSmith@yahoo.com", usTest.toString());}
 
 
 }
