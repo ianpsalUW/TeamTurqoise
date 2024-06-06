@@ -5,17 +5,35 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 
+/**
+ * Provides the functionality for the NotesPage menu bar options.
+ */
 public class NotesFile {
 
+    /**
+     * The NotesPage object which is interacting with NotesFile.
+     */
     NotesPage myNotesPage;
+    /**
+     * The name of the file being saved or opened.
+     */
     String myFileName;
+    /**
+     * The address of the file being saved or opened.
+     */
     String myFileAddress;
 
-
+    /**
+     * Constructor for the NotesFile.
+     * @param theNotesPage The NotesPage object interacting the the NotesFile.
+     */
     public NotesFile(NotesPage theNotesPage) {
         this.myNotesPage = theNotesPage;
     }
 
+    /**
+     * Creates a new txt file.
+     */
     public void newFile() {
         myNotesPage.myTextArea.setText("");
         myNotesPage.myNotes.setTitle("New");
@@ -23,6 +41,9 @@ public class NotesFile {
         myFileAddress = null;
     }
 
+    /**
+     * Opens a preexisting txt file.
+     */
     public void open() {
         FileDialog fd = new FileDialog(myNotesPage.myNotes, "Open", FileDialog.LOAD);
         fd.setVisible(true);
@@ -47,6 +68,9 @@ public class NotesFile {
         }
     }
 
+    /**
+     * Saves a txt file.
+     */
     public void save() {
         if (myFileName == null) {
             saveAs();
@@ -62,6 +86,10 @@ public class NotesFile {
         }
     }
 
+    /**
+     * Saves a txt file.
+     * This is used when saving a file for the first time.
+     */
     public void saveAs() {
         FileDialog fd = new FileDialog(myNotesPage.myNotes, "Save", FileDialog.SAVE);
         fd.setVisible(true);
@@ -81,8 +109,12 @@ public class NotesFile {
         }
     }
 
+    /**
+     * Exits notes.
+     */
     public void exit() {
         myNotesPage.dispose();
+        new ProjectFrame(myNotesPage.myProject);
     }
 
 }
