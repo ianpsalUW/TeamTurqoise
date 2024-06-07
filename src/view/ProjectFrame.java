@@ -7,7 +7,7 @@ import java.awt.*;
 
 /**
  * ProjectFrame displays the documents, budget,
- * notes, and changelog of a given project.
+ * notes, and changelog of a given myProject.
  *
  * @version JDK 21.0
  * @author Bill Lactaoen, Christian Pineda, Ian Salsich
@@ -18,7 +18,7 @@ public class ProjectFrame extends JFrame {
     /**
      * Instance field of the current project being examined.
      */
-    private final Project project;
+    private final Project myProject;
 
     /**
      * Instance field of the GUI's documents button.
@@ -28,33 +28,33 @@ public class ProjectFrame extends JFrame {
     /**
      * Instance field of the GUI's budget button.
      */
-    private final JButton budgetButton;
+    private final JButton myBudgetButton;
 
     /**
      * Instance field of the GUI's notes button.
      */
-    private final JButton notesButton;
+    private final JButton myNotesButton;
 
     /**
      * Instance field of the GUI's changelog button.
      */
-    private final JButton changelogButton;
+    private final JButton myChangelogButton;
 
     /**
      * Instance field of the back button.
      */
-    private final JButton backButton;
+    private final JButton myBackButton;
 
 
     /**
      * Constructor which initializes the main GUI.
      *
-     * @param project the project being examined
+     * @param theProject the theProject being examined
      */
-    public ProjectFrame(Project project) {
-        this.project = project;
+    public ProjectFrame(final Project theProject) {
+        myProject = theProject;
 
-        setTitle(project.getName());
+        setTitle(theProject.getName());
         setSize(700, 500);
 
         JPanel mainPanel = new JPanel();
@@ -69,32 +69,32 @@ public class ProjectFrame extends JFrame {
         mainPanel.add(documentButton);
         mainPanel.add(Box.createRigidArea(new Dimension(10, 40)));
 
-        budgetButton = new JButton("Budget");
-        budgetButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        budgetButton.setMinimumSize(new Dimension(450, 50));
-        budgetButton.setMaximumSize(new Dimension(450, 50));
-        mainPanel.add(budgetButton);
+        myBudgetButton = new JButton("Budget");
+        myBudgetButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        myBudgetButton.setMinimumSize(new Dimension(450, 50));
+        myBudgetButton.setMaximumSize(new Dimension(450, 50));
+        mainPanel.add(myBudgetButton);
         mainPanel.add(Box.createRigidArea(new Dimension(10, 40)));
 
-        notesButton = new JButton("Notes");
-        notesButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        notesButton.setMinimumSize(new Dimension(450, 50));
-        notesButton.setMaximumSize(new Dimension(450, 50));
-        mainPanel.add(notesButton);
+        myNotesButton = new JButton("Notes");
+        myNotesButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        myNotesButton.setMinimumSize(new Dimension(450, 50));
+        myNotesButton.setMaximumSize(new Dimension(450, 50));
+        mainPanel.add(myNotesButton);
         mainPanel.add(Box.createRigidArea(new Dimension(10, 40)));
 
-        changelogButton = new JButton("Changelog");
-        changelogButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        changelogButton.setMinimumSize(new Dimension(450, 50));
-        changelogButton.setMaximumSize(new Dimension(450, 50));
-        mainPanel.add(changelogButton);
+        myChangelogButton = new JButton("Changelog");
+        myChangelogButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        myChangelogButton.setMinimumSize(new Dimension(450, 50));
+        myChangelogButton.setMaximumSize(new Dimension(450, 50));
+        mainPanel.add(myChangelogButton);
         mainPanel.add(Box.createRigidArea(new Dimension(10, 30)));
 
-        backButton = new JButton("Back to Title");
-        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        backButton.setMinimumSize(new Dimension(150, 30));
-        backButton.setMaximumSize(new Dimension(150, 30));
-        mainPanel.add(backButton);
+        myBackButton = new JButton("Back to Title");
+        myBackButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        myBackButton.setMinimumSize(new Dimension(150, 30));
+        myBackButton.setMaximumSize(new Dimension(150, 30));
+        mainPanel.add(myBackButton);
 
         add(mainPanel);
         addListeners();
@@ -109,23 +109,17 @@ public class ProjectFrame extends JFrame {
      * Adds action listeners to the GUI's JButtons.
      */
     private void addListeners() {
-        budgetButton.addActionListener(event -> {
+        myBudgetButton.addActionListener(event -> {
             dispose();
-            new BudgetPage(project);
+            new BudgetPage(myProject);
         });
 
-        documentButton.addActionListener(event -> {
-            new DocumentsView(project);
-        });
+        documentButton.addActionListener(event -> new DocumentsView(myProject));
 
-        notesButton.addActionListener(event -> {
-            new NotesPage(project);
-        });
+        myNotesButton.addActionListener(event -> new NotesPage(myProject));
 
-        changelogButton.addActionListener(event -> {
-            new ChangelogFrame(project);
-        });
+        myChangelogButton.addActionListener(event -> new ChangelogFrame(myProject));
 
-        backButton.addActionListener(event -> dispose());
+        myBackButton.addActionListener(event -> dispose());
     }
 }

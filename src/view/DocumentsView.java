@@ -4,15 +4,23 @@ import model.Document;
 import model.Project;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * This is the class to view the documents in a project.
+ *
+ * @version JDK 21.0
+ * @author Bill Lactaoen
+ */
 public class DocumentsView extends JFrame implements DocumentAddedListener{
     private final Project myProject;
     private final JPanel myDocumentsPanel;
 
-    public DocumentsView(Project theProject) {
+    /**
+     * THis is the main constructor for a DocumentsView object.
+     * @param theProject is the project to display the documents from.
+     */
+    public DocumentsView(final Project theProject) {
         myProject = theProject;
         myProject.addDocumentAddedListener(this);
 
@@ -36,12 +44,7 @@ public class DocumentsView extends JFrame implements DocumentAddedListener{
 
         // Add button to add documents
         JButton myAddDocumentButton = new JButton("Add Document");
-        myAddDocumentButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                openImportFrame();
-            }
-        });
+        myAddDocumentButton.addActionListener(e -> openImportFrame());
         mainPanel.add(myAddDocumentButton, BorderLayout.SOUTH);
 
         getContentPane().add(mainPanel);
@@ -52,40 +55,44 @@ public class DocumentsView extends JFrame implements DocumentAddedListener{
         setVisible(true);
     }
 
+    /**
+     * This is the method to display the documents.
+     */
+
     private void displayDocuments() {
         ArrayList<Document> documents = myProject.getDocuments();
         for (Document document : documents) {
             JButton documentButton = new JButton(document.getFileName());
-            documentButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    DocumentFrame viewer = new DocumentFrame(document.getDirectory());
-                    viewer.setVisible(true);
-                }
+            documentButton.addActionListener(e -> {
+                DocumentFrame viewer = new DocumentFrame(document.getDirectory());
+                viewer.setVisible(true);
             });
             myDocumentsPanel.add(documentButton);
         }
     }
+
+    /**
+     * This is the method to open the import frame.
+     */
 
     private void openImportFrame() {
         ImportFrame importFrame = new ImportFrame(myProject);
         importFrame.setVisible(true);
     }
 
-    private void openDocument(Document document) {
-        DocumentFrame viewer = new DocumentFrame(document.getDirectory());
+    /**
+     * This is the method to display a document.
+     * @param theDocument is the document to display.
+     */
+    private void openDocument(final Document theDocument) {
+        DocumentFrame viewer = new DocumentFrame(theDocument.getDirectory());
         viewer.setVisible(true);
     }
 
     @Override
-    public void documentAdded(Document document) {
+    public void documentAdded(final Document document) {
         JButton documentButton = new JButton(document.getFileName());
-        documentButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                openDocument(document);
-            }
-        });
+        documentButton.addActionListener(e -> openDocument(document));
         myDocumentsPanel.add(documentButton);
         myProject.getChangelog().documentAdded(document.getFileName());
         revalidate();

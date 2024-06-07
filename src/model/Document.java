@@ -12,12 +12,13 @@ public class Document {
     /**
      * The Document's directory path.
      */
-    String myDirectory;
+
+    private final String myDirectory;
 
     /**
      * The Document's file name.
      */
-    String myFileName;
+    private final String myFileName;
 
     /**
      * Constructor that initializes the directory

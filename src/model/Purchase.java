@@ -8,8 +8,23 @@ import java.math.BigDecimal;
  */
 
 public class Purchase {
+
+    /**
+     * Instance field for the name of the purchase.
+     */
+
     private String myName;
+
+    /**
+     * Instance field for the price of the purchase.
+     */
+
     private BigDecimal myPrice;
+
+    /**
+     * instance field for the date of the purchase.
+     */
+
     private String myDate;
 
     /**
@@ -19,7 +34,7 @@ public class Purchase {
      * @param thePrice thePrice
      * @param theDate theDate
      */
-    public Purchase(String theName, BigDecimal thePrice, String theDate) {
+    public Purchase(final String theName, final BigDecimal thePrice, final String theDate) {
         myName = theName;
         myPrice = thePrice;
         myDate = theDate;
@@ -30,21 +45,21 @@ public class Purchase {
      *
      * @param theName theName
      */
-    public void setName(String theName) { myName = theName; }
+    public void setName(final String theName) { myName = theName; }
 
     /**
      * Sets the price of the purchase.
      *
      * @param thePrice thePrice
      */
-    public void setPrice(BigDecimal thePrice) { myPrice = thePrice; }
+    public void setPrice(final BigDecimal thePrice) { myPrice = thePrice; }
 
     /**
      * Sets the date of the purchase.
      *
      * @param theDate theDate
      */
-    public void setDate(String theDate) {myDate = theDate; }
+    public void setDate(final String theDate) {myDate = theDate; }
 
     /**
      * retrieves the name of the purchase.

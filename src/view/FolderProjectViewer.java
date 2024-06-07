@@ -24,98 +24,98 @@ public class FolderProjectViewer {
     /**
      * Instance field of the class' main frame.
      */
-    private final JFrame frame;
+    private final JFrame myFrame;
 
     /**
      * Instance field of the class' main panel.
      */
-    private final JPanel mainPanel;
+    private final JPanel myMainPanel;
 
     /**
      * Instance field of the list of ProjectFolder objects.
      */
-    private final List<ProjectFolder> folders;
+    private final List<ProjectFolder> myFolders;
 
     /**
      * Constructor which initializes the main JFrame.
      *
-     * @param folders the list of ProjectFolders
+     * @param theFolders the list of ProjectFolders
      */
-    public FolderProjectViewer(List<ProjectFolder> folders) {
-        this.folders = folders;
+    public FolderProjectViewer(final List<ProjectFolder> theFolders) {
+        myFolders = theFolders;
 
-        frame = new JFrame("Choose a Project");
-        frame.setBackground(new Color(64, 224, 208));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400,300);
+        myFrame = new JFrame("Choose a Project");
+        myFrame.setBackground(new Color(64, 224, 208));
+        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        myFrame.setSize(400,300);
 
-        mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        myMainPanel = new JPanel();
+        myMainPanel.setLayout(new BoxLayout(myMainPanel, BoxLayout.Y_AXIS));
 
-        JScrollPane scroll = new JScrollPane(mainPanel);
+        JScrollPane scroll = new JScrollPane(myMainPanel);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        frame.add(scroll);
+        myFrame.add(scroll);
 
         displayFolders();
 
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        myFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        myFrame.setResizable(false);
+        myFrame.setLocationRelativeTo(null);
+        myFrame.setVisible(true);
     }
 
     /**
      * Displays all project folders.
      */
     private void displayFolders() {
-        mainPanel.removeAll();
-        for (ProjectFolder folder : folders) {
+        myMainPanel.removeAll();
+        for (ProjectFolder folder : myFolders) {
             JButton folderButton = new JButton(folder.getName());
             folderButton.setBackground(new Color(241, 213, 146));
             folderButton.setMinimumSize(new Dimension(350, 40));
             folderButton.setMaximumSize(new Dimension(350, 40));
             folderButton.addActionListener(event -> displayProjects(folder));
-            mainPanel.add(folderButton);
+            myMainPanel.add(folderButton);
         }
 
-        mainPanel.add(Box.createRigidArea(new Dimension(10, 20)));
+        myMainPanel.add(Box.createRigidArea(new Dimension(10, 20)));
         JButton addFolder = new JButton("Add Folder");
         addFolder.setMinimumSize(new Dimension(150, 35));
         addFolder.setMaximumSize(new Dimension(150, 35));
         addFolder.addActionListener(event -> {
             String input = JOptionPane.showInputDialog("Enter name of new folder:");
             if (input != null) {
-                folders.add(new ProjectFolder(input, new ArrayList<>()));
+                myFolders.add(new ProjectFolder(input, new ArrayList<>()));
             }
 
             displayFolders();
         });
-        mainPanel.add(addFolder);
+        myMainPanel.add(addFolder);
 
-        mainPanel.revalidate();
-        mainPanel.repaint();
+        myMainPanel.revalidate();
+        myMainPanel.repaint();
     }
 
     /**
-     * Displays all projects of a project folder
+     * Displays all projects of a project theFolder
      *
-     * @param folder the chosen project folder
+     * @param theFolder the chosen project theFolder
      */
-    private void displayProjects(ProjectFolder folder) {
-        mainPanel.removeAll();
-        for (Project project : folder.getProjectList()) {
+    private void displayProjects(final ProjectFolder theFolder) {
+        myMainPanel.removeAll();
+        for (Project project : theFolder.getProjectList()) {
             JButton projectButton = new JButton(project.getName());
             projectButton.setMinimumSize(new Dimension(350, 40));
             projectButton.setMaximumSize(new Dimension(350, 40));
             projectButton.addActionListener(event -> {
                 new ProjectFrame(project);
-                frame.dispose();
+                myFrame.dispose();
             });
-            mainPanel.add(projectButton);
+            myMainPanel.add(projectButton);
         }
 
-        mainPanel.add(Box.createRigidArea(new Dimension(10, 20)));
+        myMainPanel.add(Box.createRigidArea(new Dimension(10, 20)));
         JButton addProject = new JButton("Add Project");
         addProject.setMinimumSize(new Dimension(150, 35));
         addProject.setMaximumSize(new Dimension(150, 35));
@@ -123,22 +123,22 @@ public class FolderProjectViewer {
             String input = JOptionPane.showInputDialog("Enter name of new project:");
             if (input != null) {
                 Project newProject = new Project(input, false,
-                        new Budget(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN)), folder);
-                folder.addProject(newProject);
+                        new Budget(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN)), theFolder);
+                theFolder.addProject(newProject);
                 newProject.getChangelog().projectCreated(input);
             }
 
-            displayProjects(folder);
+            displayProjects(theFolder);
         });
-        mainPanel.add(addProject);
+        myMainPanel.add(addProject);
 
         JButton backButton = new JButton("Back to Folders");
         backButton.setMinimumSize(new Dimension(150, 35));
         backButton.setMaximumSize(new Dimension(150, 35));
         backButton.addActionListener(event -> displayFolders());
-        mainPanel.add(backButton);
+        myMainPanel.add(backButton);
 
-        mainPanel.revalidate();
-        mainPanel.repaint();
+        myMainPanel.revalidate();
+        myMainPanel.repaint();
     }
 }

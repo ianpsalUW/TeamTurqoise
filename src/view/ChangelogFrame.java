@@ -8,7 +8,7 @@ import java.awt.*;
 
 /**
  * ChangelogFrame displays all
- * changes made on a project.
+ * changes made on a myProject.
  *
  * @version JDK 21.0
  * @author Christian Pineda
@@ -19,29 +19,29 @@ public class ChangelogFrame extends JFrame {
     /**
      * Instance field of the current project being examined.
      */
-    private final Project project;
+    private final Project myProject;
 
     /**
      * Instance field of the changelog's main panel.
      */
-    private final JPanel mainPanel;
+    private final JPanel myMainPanel;
 
 
     /**
      * Constructor which initializes the main JFrame.
      *
-     * @param project the project being examined
+     * @param theProject the myProject being examined
      */
-    public ChangelogFrame(Project project) {
-        this.project = project;
+    public ChangelogFrame(final Project theProject) {
+        myProject = theProject;
 
-        setTitle(project.getName() + " - Changelog");
+        setTitle(theProject.getName() + " - Changelog");
         setSize(400, 300);
 
-        mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        myMainPanel = new JPanel();
+        myMainPanel.setLayout(new BoxLayout(myMainPanel, BoxLayout.Y_AXIS));
 
-        JScrollPane scroll = new JScrollPane(mainPanel);
+        JScrollPane scroll = new JScrollPane(myMainPanel);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         add(scroll);
@@ -55,20 +55,20 @@ public class ChangelogFrame extends JFrame {
     }
 
     /**
-     * Displays all changes made on the project.
+     * Displays all changes made on the myProject.
      */
     private void displayLogs() {
-        mainPanel.removeAll();
-        if (project.getChangelog().getChangeLog() != null) {
-            for (Log log : project.getChangelog().getChangeLog()) {
+        myMainPanel.removeAll();
+        if (myProject.getChangelog().getChangeLog() != null) {
+            for (Log log : myProject.getChangelog().getChangeLog()) {
                 JLabel label = new JLabel(" - " + log.getItem() + " " + log.getChange()
                         + " (" + log.getDate() + ", " + log.getTime() + ")");
                 label.setFont(new Font("Dialog", Font.BOLD, 14));
-                mainPanel.add(label);
+                myMainPanel.add(label);
             }
         }
 
-        mainPanel.revalidate();
-        mainPanel.repaint();
+        myMainPanel.revalidate();
+        myMainPanel.repaint();
     }
 }

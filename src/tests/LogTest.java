@@ -21,14 +21,14 @@ public class LogTest {
 
     @Test
     public void testGetDate() { Date thisDate = new Date();
-        SimpleDateFormat dateForm = new SimpleDateFormat("MM/dd/YY");
+        SimpleDateFormat dateForm = new SimpleDateFormat("MM/dd/yy");
         SimpleDateFormat timeForm = new SimpleDateFormat("hh:mm a");
         assertEquals(dateForm.format(thisDate), myLogTest.getDate());
     }
 
     @Test
     public void testGetTimee() { Date thisDate = new Date();
-        SimpleDateFormat dateForm = new SimpleDateFormat("MM/dd/YY");
+        SimpleDateFormat dateForm = new SimpleDateFormat("MM/dd/yy");
         SimpleDateFormat timeForm = new SimpleDateFormat("hh:mm a");
         assertEquals(timeForm.format(thisDate), myLogTest.getTime());
     }

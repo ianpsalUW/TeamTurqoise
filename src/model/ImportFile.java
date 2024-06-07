@@ -19,7 +19,7 @@ public class ImportFile {
      * @param sourceFilePath a String containing the path of the source file
      * @param destinationFolderPath a String containing the path of the destination folder
      */
-    public static void copyFile(String sourceFilePath, String destinationFolderPath) throws IOException {
+    public static void copyFile(final String sourceFilePath, final String destinationFolderPath) {
         File sourceFile = new File(sourceFilePath);
         File destinationFolder = new File(destinationFolderPath);
 

@@ -27,31 +27,31 @@ public class NotesPage extends JFrame implements ActionListener {
     /**
      * A scroll pane. Goes vertically and horizontally.
      */
-    JScrollPane myScrollPane;
+    private final JScrollPane myScrollPane;
     /**
      * A menu bar which contains a single item, "File".
      */
-    JMenuBar myMenuBar;
+    private final JMenuBar myMenuBar;
     /**
      * The only JMenu. The user can save or load txt files.
      */
-    JMenu myMenuFile;
+    private final JMenu myMenuFile;
     /**
      * The JMenu items, the user can create a new file, open an old file,
      * save, or exit.
      */
-    JMenuItem myNew, myOpen, mySave, mySaveAs, myExit;
+    private final JMenuItem myNew, myOpen, mySave, mySaveAs, myExit;
     /**
      * The NotesFile object that NotesPage interacts with whenever the user
      * selects JMenu items.
      */
-    NotesFile myNotesFile = new NotesFile(this);
+    private final NotesFile myNotesFile = new NotesFile(this);
 
     /**
      * The constructor that is called when the user clicks on "Notes".
      * @param theProject The instance of the project instantiating a NotesPage.
      */
-    public NotesPage(Project theProject) {
+    public NotesPage(final Project theProject) {
         this.myProject = theProject;
 
         //Window
@@ -106,7 +106,7 @@ public class NotesPage extends JFrame implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(final ActionEvent e) {
         String command = e.getActionCommand();
 
         switch(command) {

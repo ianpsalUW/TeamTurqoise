@@ -3,12 +3,11 @@ package model;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.Serializable;
 import java.io.*;
 
 
 /**
- * This is the class to store users into a database to use later. Currently has nowhere to store the data when the
+ * This is the class to store users into a database to use later. Currently, has nowhere to store the data when the
  * program closes so all data will be lost.
  *
  * @version JDK 21.0
@@ -32,7 +31,7 @@ public class UserDB implements Serializable {
      * This is the main constructor for a UserDB object.
      */
 
-    public UserDB(String theFilePath) {
+    public UserDB(final String theFilePath) {
         myFilePath += theFilePath + File.separator + "users.txt";
         myUsers = getUsersByFile();
     }
@@ -42,7 +41,7 @@ public class UserDB implements Serializable {
      * @param theUser the user to add.
      */
 
-    public void addUser(User theUser) {
+    public void addUser(final User theUser) {
         if (getUserByName(theUser.getName()) != null || getUserByEmail(theUser.getEmail()) != null) {
             JOptionPane.showMessageDialog(null, "User already exists.",
                     "Error", JOptionPane.ERROR_MESSAGE);
@@ -57,7 +56,7 @@ public class UserDB implements Serializable {
      * @return the user object with the corresponding name or null if not found.
      */
 
-    public User getUserByName(String theName) {
+    public User getUserByName(final String theName) {
         for (User user : myUsers) {
             if (user.getName().equals(theName)) {
                 return user;
@@ -71,7 +70,7 @@ public class UserDB implements Serializable {
      * @param theEmail the email to match the user to.
      * @return the user object with the corresponding email or null if not found.
      */
-    public User getUserByEmail(String theEmail) {
+    public User getUserByEmail(final String theEmail) {
         for (User user : myUsers) {
             if (user.getEmail().equals(theEmail)) {
                 return user;
@@ -97,7 +96,7 @@ public class UserDB implements Serializable {
 
     public void exportUserDB() {
         ObjectOutputStream oos = null;
-        FileOutputStream fout = null;
+        FileOutputStream fout;
         try {
             fout = new FileOutputStream("C:\\Users\\stflaptop\\Desktop\\360Turqoise\\BasicGUI\\src\\profile.txt", true);
             oos = new ObjectOutputStream(fout);
@@ -115,9 +114,9 @@ public class UserDB implements Serializable {
      *
      * @param fileLocation a String
      */
-    public void exportUserDB(String fileLocation) {
+    public void exportUserDB(final String fileLocation) {
         ObjectOutputStream oos = null;
-        FileOutputStream fout = null;
+        FileOutputStream fout;
         try {
             fout = new FileOutputStream(fileLocation, true);
             oos = new ObjectOutputStream(fout);
@@ -142,7 +141,7 @@ public class UserDB implements Serializable {
             try (BufferedReader reader = new BufferedReader(new FileReader(outputFile))) {
                 String username;
                 String email;
-                User currentUser = null;
+                User currentUser;
                 while((username = reader.readLine()) != null) {
                     if((email = reader.readLine()) != null) {
                         currentUser = new User(username, email);

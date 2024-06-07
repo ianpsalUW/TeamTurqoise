@@ -13,7 +13,7 @@ public class NotesFile {
     /**
      * The NotesPage object which is interacting with NotesFile.
      */
-    NotesPage myNotesPage;
+    private final NotesPage myNotesPage;
     /**
      * The name of the file being saved or opened.
      */
@@ -27,7 +27,7 @@ public class NotesFile {
      * Constructor for the NotesFile.
      * @param theNotesPage The NotesPage object interacting the the NotesFile.
      */
-    public NotesFile(NotesPage theNotesPage) {
+    public NotesFile(final NotesPage theNotesPage) {
         this.myNotesPage = theNotesPage;
     }
 

@@ -3,7 +3,6 @@ package main;
 import model.*;
 import view.AboutFrame;
 import view.FolderProjectViewer;
-import model.UserDB;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +12,7 @@ import java.util.List;
 
 /**
  * The main JFrame which displays "login",
- * "open projects", and "about" features.
+ * "open projects", and "myAbout" features.
  *
  * @version JDK 21.0
  * @author Jordan Festin, Bill Lactaoen, Christian Pineda, Ian Salsich
@@ -22,44 +21,39 @@ import java.util.List;
 public class MainFrame {
 
     /**
-     * Instance field of the GUI frame.
-     */
-    private final JFrame frame;
-
-    /**
      * Instance field of the GUI's Login button.
      */
-    private JButton loginButton;
+    private JButton myLoginButton;
 
     /**
      * Instance field of the GUI's About Page button.
      */
-    private JButton aboutButton;
+    private JButton myAboutButton;
 
     /**
      * Instance field of the GUI's "Choose a Project" button.
      */
-    private static JButton chooseProjectButton;
+    private static JButton myChooseProjectButton;
 
     /**
      * Instance field of the list of Project Folders.
      */
-    private static List<ProjectFolder> folders;
+    private static List<ProjectFolder> myFolders;
 
     /**
      * Instance field of the user database.
      */
-    private final UserDB userDB;
+    private final UserDB myUserDB;
 
     /**
      * Instance field of the current user in the GUI.
      */
-    private static User currentUser;
+    private static User myCurrentUser;
 
     /**
      * Instance field of the About object.
      */
-    private final About about;
+    private final About myAbout;
 
     /**
      * Static field for the program directory.
@@ -72,33 +66,33 @@ public class MainFrame {
      * Default constructor which initializes GUI features.
      */
     public MainFrame() {
-        about = new About();
-        about.add("Jordan Festin - \"zzz\"");
-        about.add("Bill Lactaoen - \"suffering\"");
-        about.add("Christian Pineda - \"Hungry rn\"");
-        about.add("Ian Salsich - \":)\"");
+        myAbout = new About();
+        myAbout.add("Jordan Festin - \"zzz\"");
+        myAbout.add("Bill Lactaoen - \"suffering\"");
+        myAbout.add("Christian Pineda - \"Hungry rn\"");
+        myAbout.add("Ian Salsich - \":)\"");
 
-        frame = new JFrame("Project Pro v" + about.getVersion());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(700, 500);
-        frame.getContentPane().setBackground(new Color(64, 224, 208));
-        frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        frame.setResizable(false);
+        JFrame myFrame = new JFrame("Project Pro v" + myAbout.getVersion());
+        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        myFrame.setSize(700, 500);
+        myFrame.getContentPane().setBackground(new Color(64, 224, 208));
+        myFrame.getContentPane().setLayout(new BoxLayout(myFrame.getContentPane(), BoxLayout.Y_AXIS));
+        myFrame.setLocationRelativeTo(null);
+        myFrame.setVisible(true);
+        myFrame.setResizable(false);
 
-        folders = readFileToFolders();
+        myFolders = readFileToFolders();
 
-        userDB = new UserDB(myDirectory + File.separator + "common");
+        myUserDB = new UserDB(myDirectory + File.separator + "common");
 
-        frame.add(createMainPanel());
+        myFrame.add(createMainPanel());
         addListeners();
 
         // Run all the writetofile methods upon application close/
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             writeFoldersToFile();
-            userDB.writeDBToFile();
-            for (ProjectFolder folder : folders) {
+            myUserDB.writeDBToFile();
+            for (ProjectFolder folder : myFolders) {
                 folder.writeProjects();
                 for (Project project : folder.getProjectList()) {
                     project.writeDocuments();
@@ -122,24 +116,24 @@ public class MainFrame {
         mainPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPanel.add(Box.createRigidArea(new Dimension(10, 70)));
 
-        loginButton = new JButton("Login Account");
-        loginButton.setMinimumSize(new Dimension(450, 50));
-        loginButton.setMaximumSize(new Dimension(450, 50));
+        myLoginButton = new JButton("Login Account");
+        myLoginButton.setMinimumSize(new Dimension(450, 50));
+        myLoginButton.setMaximumSize(new Dimension(450, 50));
 
-        chooseProjectButton = new JButton("Choose a Project");
-        chooseProjectButton.setMinimumSize(new Dimension(450, 50));
-        chooseProjectButton.setMaximumSize(new Dimension(450, 50));
-        chooseProjectButton.setEnabled(false);
+        myChooseProjectButton = new JButton("Choose a Project");
+        myChooseProjectButton.setMinimumSize(new Dimension(450, 50));
+        myChooseProjectButton.setMaximumSize(new Dimension(450, 50));
+        myChooseProjectButton.setEnabled(false);
 
-        aboutButton = new JButton("About");
-        aboutButton.setMinimumSize(new Dimension(450, 50));
-        aboutButton.setMaximumSize(new Dimension(450, 50));
+        myAboutButton = new JButton("About");
+        myAboutButton.setMinimumSize(new Dimension(450, 50));
+        myAboutButton.setMaximumSize(new Dimension(450, 50));
 
-        mainPanel.add(loginButton);
+        mainPanel.add(myLoginButton);
         mainPanel.add(Box.createRigidArea(new Dimension(10, 70)));
-        mainPanel.add(chooseProjectButton);
+        mainPanel.add(myChooseProjectButton);
         mainPanel.add(Box.createRigidArea(new Dimension(10, 70)));
-        mainPanel.add(aboutButton);
+        mainPanel.add(myAboutButton);
 
         return mainPanel;
     }
@@ -148,11 +142,11 @@ public class MainFrame {
      * Adds actions to the Login, Choose Project, and About Page buttons.
      */
     private void addListeners() {
-        loginButton.addActionListener(event -> new LogInFrame(userDB));
+        myLoginButton.addActionListener(event -> new LogInFrame(myUserDB));
 
-        chooseProjectButton.addActionListener(event -> new FolderProjectViewer(folders));
+        myChooseProjectButton.addActionListener(event -> new FolderProjectViewer(myFolders));
 
-        aboutButton.addActionListener(theEvent -> new AboutFrame(currentUser, about));
+        myAboutButton.addActionListener(theEvent -> new AboutFrame(myCurrentUser, myAbout));
     }
 
     /**
@@ -161,16 +155,16 @@ public class MainFrame {
      * @param theUser   the user to be changed
      */
     static void setCurrentUser(final User theUser) {
-        currentUser = theUser;
-        chooseProjectButton.setEnabled(true);
+        myCurrentUser = theUser;
+        myChooseProjectButton.setEnabled(true);
     }
 
     /**
      * Runs the application.
      *
-     * @param args the args
+     * @param theArgs the theArgs
      */
-    public static void main(String[] args) {
+    public static void main(final String[] theArgs) {
         if (makeDirectory()) {
             SwingUtilities.invokeLater(MainFrame::new);
         }
@@ -213,19 +207,20 @@ public class MainFrame {
         String directory = myDirectory + File.separator + "common";
         File foldersDir = new File(directory, "folders.txt");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(foldersDir))) {
-            for (ProjectFolder folder : folders) {
+            for (ProjectFolder folder : myFolders) {
                 writer.write(folder.toString());
                 writer.newLine();
             }
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Failed to write folders to file.",
+            JOptionPane.showMessageDialog(null, "Failed to write myFolders to file.",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     /**
-     * Reads the folders.txt file
-     * @return
+     * Reads the folders.txt file.
+     *
+     * @return the List created.
      */
 
     private static List<ProjectFolder> readFileToFolders() {
@@ -235,14 +230,14 @@ public class MainFrame {
         if (file.exists()) {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line;
-                ProjectFolder currentFolder = null;
+                ProjectFolder currentFolder;
                 while((line = reader.readLine()) != null) {
                     currentFolder = new ProjectFolder(line);
                         folderList.add(currentFolder);
                 }
 
             } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Failed to read folders from file.",
+                JOptionPane.showMessageDialog(null, "Failed to read myFolders from file.",
                         "Error", JOptionPane.ERROR_MESSAGE);
             }
         }

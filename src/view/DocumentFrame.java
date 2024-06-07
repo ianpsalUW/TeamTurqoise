@@ -19,11 +19,26 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 
+/**
+ * Uses apache poi, PDFbox, and Tika libraries to display various file formats natively on the application.
+ *
+ * @version JDK 21.0
+ * @author Bill Lactaoen
+ */
 public class DocumentFrame extends JFrame {
+
+    /**
+     * This is the field for the text area.
+     */
 
     private JTextArea myTextArea;
 
-    public DocumentFrame(String filePath) {
+    /**
+     * This is the method for creating the file display frame.
+     * @param theFilePath is the path to the file to display.
+     */
+
+    public DocumentFrame(final String theFilePath) {
         // Set up the frame
         setTitle("Document Viewer");
         setSize(800, 600);
@@ -32,32 +47,32 @@ public class DocumentFrame extends JFrame {
         setResizable(false);
 
         // Determine file extension and display accordingly
-        String extension = getFileExtension(filePath);
+        String extension = getFileExtension(theFilePath);
 
         switch (extension) {
             case "txt":
-                displayTextFile(new File(filePath));
+                displayTextFile(new File(theFilePath));
                 break;
             case "jpg":
             case "jpeg":
             case "png":
             case "gif":
-                displayImageFile(new File(filePath));
+                displayImageFile(new File(theFilePath));
                 break;
             case "pdf":
-                displayPdfFile(new File(filePath));
+                displayPdfFile(new File(theFilePath));
                 break;
             case "doc":
             case "docx":
-                displayWordFile(new File(filePath));
+                displayWordFile(new File(theFilePath));
                 break;
             case "xls":
             case "xlsx":
-                displayExcelFile(new File(filePath));
+                displayExcelFile(new File(theFilePath));
                 break;
             case "ppt":
             case "pptx":
-                displayPowerPointFile(new File(filePath));
+                displayPowerPointFile(new File(theFilePath));
                 break;
             default:
                 displayUnsupportedFileMessage();
@@ -65,27 +80,36 @@ public class DocumentFrame extends JFrame {
         }
     }
 
-    private String getFileExtension(String filePath) {
+    /**
+     * This is the method to get the file extension.
+     * @param theFilePath is the path to the file.
+     * @return the file extension.
+     */
+    private String getFileExtension(final String theFilePath) {
         String extension = "";
-        int i = filePath.lastIndexOf('.');
+        int i = theFilePath.lastIndexOf('.');
         if (i > 0) {
-            extension = filePath.substring(i + 1).toLowerCase();
+            extension = theFilePath.substring(i + 1).toLowerCase();
         }
         return extension;
     }
 
-    private void displayTextFile(File file) {
+    /**
+     * This is the method to display a text file.
+     * @param theFile is the file to display.
+     */
+    private void displayTextFile(final File theFile) {
         myTextArea = new JTextArea();
         myTextArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(myTextArea);
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(theFile))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 myTextArea.append(line + "\n");
             }
         } catch (IOException e) {
-            myTextArea.setText("Error reading file: " + e.getMessage());
+            myTextArea.setText("Error reading theFile: " + e.getMessage());
         }
 
         add(scrollPane, BorderLayout.CENTER);
@@ -93,21 +117,31 @@ public class DocumentFrame extends JFrame {
 
     }
 
-    private void displayImageFile(File file) {
+    /**
+     * this is the method to display an image file.
+     * @param theFile is the file to display.
+     */
+
+    private void displayImageFile(final File theFile) {
         JLabel myImageLabel = new JLabel();
         JScrollPane scrollPane = new JScrollPane(myImageLabel);
 
         try {
-            BufferedImage image = ImageIO.read(file);
+            BufferedImage image = ImageIO.read(theFile);
             myImageLabel.setIcon(new ImageIcon(image));
         } catch (IOException e) {
-            myImageLabel.setText("Error reading image file: " + e.getMessage());
+            myImageLabel.setText("Error reading image theFile: " + e.getMessage());
         }
 
         add(scrollPane, BorderLayout.CENTER);
     }
 
-    private void displayPdfFile(File file) {
+    /**
+     * This is the method to display a PDF.
+     * @param theFile is the file to display.
+     */
+
+    private void displayPdfFile(final File theFile) {
         JPanel pdfPanel = new JPanel() {
             private BufferedImage renderedImage;
 
@@ -121,7 +155,7 @@ public class DocumentFrame extends JFrame {
 
             {
                 try {
-                    PDDocument document = Loader.loadPDF(file);
+                    PDDocument document = Loader.loadPDF(theFile);
                     PDFRenderer pdfRenderer = new PDFRenderer(document);
                     int pageCount = document.getNumberOfPages();
                     // Render all pages into a single image
@@ -177,12 +211,16 @@ public class DocumentFrame extends JFrame {
         add(scrollPane, BorderLayout.CENTER);
     }
 
-    private void displayWordFile(File file) {
+    /**
+     * This is the method to display an MS Word file.
+     * @param theFile is the file to display.
+     */
+    private void displayWordFile(final File theFile) {
         myTextArea = new JTextArea();
         myTextArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(myTextArea);
 
-        try (FileInputStream fis = new FileInputStream(file)) {
+        try (FileInputStream fis = new FileInputStream(theFile)) {
             XWPFDocument docx = new XWPFDocument(fis);
             StringBuilder sb = new StringBuilder();
             for (XWPFParagraph paragraph : docx.getParagraphs()) {
@@ -190,20 +228,25 @@ public class DocumentFrame extends JFrame {
             }
             myTextArea.setText(sb.toString());
         } catch (IOException e) {
-            myTextArea.setText("Error reading Word file: " + e.getMessage());
+            myTextArea.setText("Error reading Word theFile: " + e.getMessage());
         }
 
         add(scrollPane, BorderLayout.CENTER);
     }
 
-    private void displayExcelFile(File file) {
+    /**
+     * This is the method to display an MS Excel file.
+     * @param theFile the file to display.
+     */
+
+    private void displayExcelFile(final File theFile) {
         myTextArea = new JTextArea();
         myTextArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(myTextArea);
 
-        try (FileInputStream fis = new FileInputStream(file)) {
+        try (FileInputStream fis = new FileInputStream(theFile)) {
             Workbook workbook;
-            if (file.getName().endsWith(".xls")) {
+            if (theFile.getName().endsWith(".xls")) {
                 workbook = new HSSFWorkbook(fis);
             } else {
                 workbook = new XSSFWorkbook(fis);
@@ -221,18 +264,23 @@ public class DocumentFrame extends JFrame {
             }
             myTextArea.setText(sb.toString());
         } catch (IOException e) {
-            myTextArea.setText("Error reading Excel file: " + e.getMessage());
+            myTextArea.setText("Error reading Excel theFile: " + e.getMessage());
         }
 
         add(scrollPane, BorderLayout.CENTER);
     }
 
-    private void displayPowerPointFile(File file) {
+    /**
+     * This is the method to display an MS PowerPoint file. Currently, does not work.
+     * @param theFile is the file to display.
+     */
+
+    private void displayPowerPointFile(final File theFile) {
         myTextArea = new JTextArea();
         myTextArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(myTextArea);
 
-        try (FileInputStream fis = new FileInputStream(file)) {
+        try (FileInputStream fis = new FileInputStream(theFile)) {
             XMLSlideShow ppt = new XMLSlideShow(fis);
             StringBuilder sb = new StringBuilder();
             for (XSLFSlide slide : ppt.getSlides()) {
@@ -247,11 +295,15 @@ public class DocumentFrame extends JFrame {
             }
             myTextArea.setText(sb.toString());
         } catch (IOException e) {
-            myTextArea.setText("Error reading PowerPoint file: " + e.getMessage());
+            myTextArea.setText("Error reading PowerPoint theFile: " + e.getMessage());
         }
 
         add(scrollPane, BorderLayout.CENTER);
     }
+
+    /**
+     * This is the method to display that the file type is unsupported by the application.
+     */
 
     private void displayUnsupportedFileMessage() {
         JLabel label = new JLabel("Unsupported file type.");

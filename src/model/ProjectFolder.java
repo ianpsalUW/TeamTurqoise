@@ -18,12 +18,12 @@ public class ProjectFolder {
     /**
      * The ProjectFolder's list of Project objects.
      */
-    List<Project> myProjectList;
+    private final List<Project> myProjectList;
 
     /**
      * The ProjectFolder's name.
      */
-    String myProjectFolderName = "Default name";
+    private String myProjectFolderName = "Default name";
 
     /**
      * The ProjectFolder's directory.
@@ -47,7 +47,7 @@ public class ProjectFolder {
      * Constructor which initializes a ProjectFolder given a list of Project objects.
      * @param projects a List of Project objects
      */
-    public ProjectFolder(List<Project> projects) {
+    public ProjectFolder(final List<Project> projects) {
         myProjectList = projects;
         myDirectory += File.separator + myProjectFolderName;
         createDirectory();
@@ -60,7 +60,7 @@ public class ProjectFolder {
      * @param theProjectFolderName a String
      * @param projects a List of Project objects
      */
-    public ProjectFolder(String theProjectFolderName, List<Project> projects) {
+    public ProjectFolder(final String theProjectFolderName, final List<Project> projects) {
         myProjectFolderName = theProjectFolderName;
         myProjectList = projects;
         myDirectory += File.separator + myProjectFolderName;
@@ -88,10 +88,10 @@ public class ProjectFolder {
     /**
      * Adds a project.
      *
-     * @param project a Project object
+     * @param theProject a Project object
      */
-    public void addProject(Project project) {
-        myProjectList.add(project);
+    public void addProject(final Project theProject) {
+        myProjectList.add(theProject);
     }
 
     /**

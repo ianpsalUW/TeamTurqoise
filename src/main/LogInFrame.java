@@ -53,7 +53,7 @@ public class LogInFrame extends JFrame implements ActionListener {
      * @param theUserDatabase is the user database that the program is running.
      */
 
-    public LogInFrame(UserDB theUserDatabase) {
+    public LogInFrame(final UserDB theUserDatabase) {
         this.myUserDatabase = theUserDatabase;
 
         setTitle("Login");
@@ -88,7 +88,7 @@ public class LogInFrame extends JFrame implements ActionListener {
 
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(final ActionEvent e) {
         if (e.getSource() == myLoginButton) {
             String username = myUsernameField.getText();
             String email = myEmailField.getText();
@@ -125,13 +125,13 @@ public class LogInFrame extends JFrame implements ActionListener {
 
     /**
      * This is a method to ensure that the email is of the email address pattern.
-     * @param email is the email to check.
+     * @param theEmail is the email to check.
      * @return true if it follows the pattern, false otherwise.
      */
 
-    private boolean isValidEmail(String email) {
+    private boolean isValidEmail(final String theEmail) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        return email.matches(emailRegex);
+        return theEmail.matches(emailRegex);
     }
 
 }

@@ -35,7 +35,7 @@ public class About {
      *
      * @param theDev    the String to be added
      */
-    public void add(String theDev) {
+    public void add(final String theDev) {
         myDevelopers.add(theDev);
     }
 

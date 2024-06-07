@@ -16,12 +16,12 @@ public class Changelog {
     /**
      * Instance field for the array list of log objects.
      */
-    public ArrayList<Log> myChangeLog;
+    private final ArrayList<Log> myChangeLog;
 
     /**
      * Instance field for the file path
      */
-    String myPath;
+    private final String myPath;
 
     /**
      * Default constructor, initializes array list.
@@ -42,74 +42,74 @@ public class Changelog {
     /**
      * Adds a purchased item log entry to the changelog.
      *
-     * @param ItemName ItemName
+     * @param theItemName theItemName
      */
-    public void purchasedItem(String ItemName) {
-        myChangeLog.add(new Log(ItemName, "purchased"));
+    public void purchasedItem(final String theItemName) {
+        myChangeLog.add(new Log(theItemName, "purchased"));
     }
 
     /**
      * Adds a purchase edited log entry to the changelog.
-     * @param ItemName ItemName
+     * @param theItemName theItemName
      */
-    public void purchaseEdited(String ItemName) {
-        myChangeLog.add(new Log(ItemName, "expenditure edited"));
+    public void purchaseEdited(final String theItemName) {
+        myChangeLog.add(new Log(theItemName, "expenditure edited"));
     }
 
     /**
      * Adds a purchase removed log entry to the changelog.
-     * @param ItemName ItemName
+     * @param theItemName theItemName
      */
-    public void purchaseRemoved(String ItemName) {
-        myChangeLog.add(new Log(ItemName, "expenditure removed"));
+    public void purchaseRemoved(final String theItemName) {
+        myChangeLog.add(new Log(theItemName, "expenditure removed"));
     }
 
     /**
      * Adds a document added log entry to the changelog.
-     * @param ItemName ItemName
+     * @param theItemName theItemName
      */
-    public void documentAdded(String ItemName) {
-        myChangeLog.add(new Log(ItemName, "document added"));
+    public void documentAdded(final String theItemName) {
+        myChangeLog.add(new Log(theItemName, "document added"));
     }
 
     /**
      * Adds a document removed log entry to the changelog.
-     * @param ItemName ItemName
+     * @param theItemName theItemName
      */
-    public void documentRemoved(String ItemName) {
-        myChangeLog.add(new Log(ItemName, "document removed"));
+    public void documentRemoved(final String theItemName) {
+        myChangeLog.add(new Log(theItemName, "document removed"));
     }
 
     /**
      * Adds a notes created log entry to the changelog.
-     * @param ItemName ItemName
+     * @param theItemName theItemName
      */
-    public void notesCreated(String ItemName) {
-        myChangeLog.add(new Log(ItemName, "notes created"));
+    public void notesCreated(final String theItemName) {
+        myChangeLog.add(new Log(theItemName, "notes created"));
     }
 
     /**
      * Adds a notes edited log entry to the changelog.
-     * @param ItemName ItemName
+     * @param theItemName theItemName
      */
-    public void notesEdited(String ItemName) {
-        myChangeLog.add(new Log(ItemName, "notes edited"));
+    public void notesEdited(final String theItemName) {
+        myChangeLog.add(new Log(theItemName, "notes edited"));
     }
 
     /**
      * Adds a notes removed log entry to the changelog.
-     * @param ItemName ItemName
+     * @param theItemName theItemName
      */
-    public void notesRemoved(String ItemName) {
-        myChangeLog.add(new Log(ItemName, "notes removed"));
+    public void notesRemoved(final String theItemName) {
+        myChangeLog.add(new Log(theItemName, "notes removed"));
     }
 
     /**
      * Adds a project created log entry to the changelog.
-     * @param projectName projectName
+     * @param theProjectName theProjectName
      */
-    public void projectCreated(String projectName) {
-        myChangeLog.add(new Log(projectName, "project created"));
+    public void projectCreated(final String theProjectName) {
+        myChangeLog.add(new Log(theProjectName, "project created"));
     }
 
     /**
@@ -155,6 +155,8 @@ public class Changelog {
 
     /**
      * Reads the changelog.txt file for changelog remembering
+     *
+     * @return an Arraylist of Log objects from changelog.txt
      */
 
     private ArrayList<Log> readLog() {

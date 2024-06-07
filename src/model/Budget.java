@@ -30,7 +30,7 @@ public class Budget {
      *
      * @param theBudget theBudget
      */
-    public void setBudget(BigDecimal theBudget){ myBudget = theBudget.setScale(2, RoundingMode.HALF_EVEN); }
+    public void setBudget(final BigDecimal theBudget){ myBudget = theBudget.setScale(2, RoundingMode.HALF_EVEN); }
 
     /**
      * receives the value of the budget
@@ -46,7 +46,7 @@ public class Budget {
      * @param theValue theValue
      * @return boolean
      */
-    public boolean checkBudget(BigDecimal theValue) { return (myBudget.compareTo(theValue) <= 0);}
+    public boolean checkBudget(final BigDecimal theValue) { return (myBudget.compareTo(theValue) <= 0);}
 
     /**
      * Returns the budget as a String object.

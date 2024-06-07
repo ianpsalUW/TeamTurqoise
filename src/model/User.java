@@ -97,7 +97,7 @@ public class User implements Serializable {
 
     public void exportUser() {
         ObjectOutputStream oos = null;
-        FileOutputStream fout = null;
+        FileOutputStream fout;
         try {
             fout = new FileOutputStream("C:\\Users\\stflaptop\\Desktop\\360Turqoise\\BasicGUI\\src\\profile.txt", true);
             oos = new ObjectOutputStream(fout);

@@ -17,49 +17,54 @@ public class Log {
     /**
      * Instance field that contains the name of the item.
      */
-    String myItem;
+    private final String myItem;
 
     /**
      * Instance field that contains the change made to the item.
      */
-    String myChange;
+    private final String myChange;
 
     /**
      * Instance field that contains the date item was altered.
      */
-    String myDate;
+    private final String myDate;
 
     /**
      * Instance field that contains the time item was altered.
      */
-    String myTime;
+    private final String myTime;
 
     /**
-     * Default Constructor for the log object, requires name and change of item.
+     * Default Constructor for the log object, requires name and theChange of theItem.
      *
-     * @param item item
-     * @param change change
+     * @param theItem theItem
+     * @param theChange theChange
      */
-    public Log(String item, String change) {
+    public Log(final String theItem, final String theChange) {
         Date thisDate = new Date();
-        SimpleDateFormat dateForm = new SimpleDateFormat("MM/dd/YY");
+        SimpleDateFormat dateForm = new SimpleDateFormat("MM/dd/yy");
         SimpleDateFormat timeForm = new SimpleDateFormat("hh:mm a");
-        myChange = change;
-        myItem = item;
+        myChange = theChange;
+        myItem = theItem;
         myDate = dateForm.format(thisDate);
         myTime = timeForm.format(thisDate);
 
     }
 
     /**
-     * Constructor for previous log objects, requires name, change, date, and time
+     * Constructor for stored Log objetcs, requires name, change, date, and time.
+     *
+     * @param theItem is the item
+     * @param theChange is the change
+     * @param theDate is the date
+     * @param theTime is the time
      */
 
-    public Log(String item, String change, String date, String time) {
-        myItem =item;
-        myChange = change;
-        myDate = date;
-        myTime = time;
+    public Log(final String theItem, final String theChange, final String theDate, final String theTime) {
+        myItem = theItem;
+        myChange = theChange;
+        myDate = theDate;
+        myTime = theTime;
     }
 
     /**

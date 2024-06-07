@@ -33,7 +33,7 @@ public class AboutFrame extends JFrame {
      * @param theUser   the current user
      * @param theAbt    an About object
      */
-    public AboutFrame(User theUser, About theAbt) {
+    public AboutFrame(final User theUser, final About theAbt) {
         super("About");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(new Dimension(300, 220));

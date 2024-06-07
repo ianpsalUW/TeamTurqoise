@@ -81,7 +81,7 @@ public class Spending {
      *
      * @param thePurchase thePurchase
      */
-    public void addPurchase(Purchase thePurchase) {
+    public void addPurchase(final Purchase thePurchase) {
         myPurchases.add(thePurchase);
         myTotal = myTotal.add(thePurchase.getPrice()).setScale(2, RoundingMode.HALF_EVEN);
     }
@@ -91,10 +91,10 @@ public class Spending {
      *
      * @param theName theName
      */
-    public void removePurchase(String theName) {
+    public void removePurchase(final String theName) {
         Iterator<Purchase> itr = myPurchases.iterator();
         while (itr.hasNext()) {
-            Purchase currentPurchase = (Purchase)itr.next();
+            Purchase currentPurchase = itr.next();
             String currentName = currentPurchase.getName();
             if (Objects.equals(currentName, theName)) {
                 itr.remove();

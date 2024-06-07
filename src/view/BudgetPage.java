@@ -24,53 +24,53 @@ public class BudgetPage extends JFrame {
     /**
      * Instance field of the current project being examined.
      */
-    private final Project project;
+    private final Project myProject;
 
     /**
      * Instance field of the total budget displayed.
      */
-    private final JLabel totalLabel;
+    private final JLabel myTotalLabel;
 
     /**
      * Instance field of the Edit Budget button.
      */
-    private final JButton editTotalButton;
+    private final JButton myEditTotalButton;
 
     /**
      * Instance field of the current amount spent displayed.
      */
-    private final JLabel currentAmtLabel;
+    private final JLabel myCurrentAmtLabel;
 
     /**
      * Instance field of the View Expenditures button.
      */
-    private final JButton viewSpending;
+    private final JButton myViewSpending;
 
     /**
      * Instance field of the Add Expenditure button.
      */
-    private final JButton addSpending;
+    private final JButton myAddSpending;
 
     /**
      * Instance field of the back button.
      */
-    private final JButton backButton;
+    private final JButton myBackButton;
 
     /**
      * Instance field of the remaining budget displayed.
      */
-    private final JLabel remainingLabel;
+    private final JLabel myRemainingLabel;
 
 
     /**
      * Constructor which initializes the main JFrame.
      *
-     * @param project the current project being examined
+     * @param theProject the current myProject being examined
      */
-    public BudgetPage(Project project) {
-        this.project = project;
+    public BudgetPage(final Project theProject) {
+        myProject = theProject;
 
-        setTitle(project.getName() + " - Budget");
+        setTitle(theProject.getName() + " - Budget");
         setSize(700, 500);
 
         JPanel mainPanel = new JPanel();
@@ -82,58 +82,58 @@ public class BudgetPage extends JFrame {
         totalPanel.setMinimumSize(new Dimension(700, 35));
         totalPanel.setMaximumSize(new Dimension(700, 35));
         totalPanel.setBackground(new Color(64, 224, 208));
-        totalLabel = new JLabel("Total Budget: $" +
-                project.getBudget().getBudget().setScale(2, RoundingMode.HALF_EVEN));
-        totalLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        totalLabel.setFont(new Font("Dialog", Font.BOLD, 20));
-        editTotalButton = new JButton("Edit");
-        editTotalButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        editTotalButton.setMinimumSize(new Dimension(100, 30));
-        editTotalButton.setMaximumSize(new Dimension(100, 30));
-        totalPanel.add(totalLabel);
+        myTotalLabel = new JLabel("Total Budget: $" +
+                theProject.getBudget().getBudget().setScale(2, RoundingMode.HALF_EVEN));
+        myTotalLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        myTotalLabel.setFont(new Font("Dialog", Font.BOLD, 20));
+        myEditTotalButton = new JButton("Edit");
+        myEditTotalButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        myEditTotalButton.setMinimumSize(new Dimension(100, 30));
+        myEditTotalButton.setMaximumSize(new Dimension(100, 30));
+        totalPanel.add(myTotalLabel);
         totalPanel.add(Box.createRigidArea(new Dimension(20, 10)));
-        totalPanel.add(editTotalButton);
+        totalPanel.add(myEditTotalButton);
         mainPanel.add(totalPanel);
         mainPanel.add(Box.createRigidArea(new Dimension(10, 15)));
 
-        currentAmtLabel = new JLabel("Current Spending: $" +
-                project.getSpending().getTotal());
-        currentAmtLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        currentAmtLabel.setFont(new Font("Dialog", Font.BOLD, 20));
-        mainPanel.add(currentAmtLabel);
+        myCurrentAmtLabel = new JLabel("Current Spending: $" +
+                theProject.getSpending().getTotal());
+        myCurrentAmtLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        myCurrentAmtLabel.setFont(new Font("Dialog", Font.BOLD, 20));
+        mainPanel.add(myCurrentAmtLabel);
         mainPanel.add(Box.createRigidArea(new Dimension(10, 20)));
 
         BigDecimal remaining =
-                project.getBudget().getBudget().subtract(project.getSpending().getTotal());
+                theProject.getBudget().getBudget().subtract(theProject.getSpending().getTotal());
         if (remaining.compareTo(BigDecimal.ZERO) < 0) {
-            remainingLabel = new JLabel("Remaining Budget: -$" + remaining.abs());
+            myRemainingLabel = new JLabel("Remaining Budget: -$" + remaining.abs());
         } else {
-            remainingLabel = new JLabel("Remaining Budget: $" + remaining);
+            myRemainingLabel = new JLabel("Remaining Budget: $" + remaining);
         }
-        remainingLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        remainingLabel.setFont(new Font("Dialog", Font.BOLD, 20));
-        mainPanel.add(remainingLabel);
+        myRemainingLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        myRemainingLabel.setFont(new Font("Dialog", Font.BOLD, 20));
+        mainPanel.add(myRemainingLabel);
         mainPanel.add(Box.createRigidArea(new Dimension(10, 30)));
 
-        viewSpending = new JButton("View Expenditure List");
-        viewSpending.setAlignmentX(Component.CENTER_ALIGNMENT);
-        viewSpending.setMinimumSize(new Dimension(350, 40));
-        viewSpending.setMaximumSize(new Dimension(350, 40));
-        mainPanel.add(viewSpending);
+        myViewSpending = new JButton("View Expenditure List");
+        myViewSpending.setAlignmentX(Component.CENTER_ALIGNMENT);
+        myViewSpending.setMinimumSize(new Dimension(350, 40));
+        myViewSpending.setMaximumSize(new Dimension(350, 40));
+        mainPanel.add(myViewSpending);
         mainPanel.add(Box.createRigidArea(new Dimension(10, 25)));
 
-        addSpending = new JButton("Add Expenditure");
-        addSpending.setAlignmentX(Component.CENTER_ALIGNMENT);
-        addSpending.setMinimumSize(new Dimension(350, 40));
-        addSpending.setMaximumSize(new Dimension(350, 40));
-        mainPanel.add(addSpending);
+        myAddSpending = new JButton("Add Expenditure");
+        myAddSpending.setAlignmentX(Component.CENTER_ALIGNMENT);
+        myAddSpending.setMinimumSize(new Dimension(350, 40));
+        myAddSpending.setMaximumSize(new Dimension(350, 40));
+        mainPanel.add(myAddSpending);
         mainPanel.add(Box.createRigidArea(new Dimension(10, 25)));
 
-        backButton = new JButton("Back to Project");
-        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        backButton.setMinimumSize(new Dimension(150, 30));
-        backButton.setMaximumSize(new Dimension(150, 30));
-        mainPanel.add(backButton);
+        myBackButton = new JButton("Back to Project");
+        myBackButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        myBackButton.setMinimumSize(new Dimension(150, 30));
+        myBackButton.setMaximumSize(new Dimension(150, 30));
+        mainPanel.add(myBackButton);
 
         add(mainPanel);
         addListeners();
@@ -148,27 +148,27 @@ public class BudgetPage extends JFrame {
      * Adds action listeners to the initialized JButtons.
      */
     private void addListeners() {
-        editTotalButton.addActionListener(event -> {
+        myEditTotalButton.addActionListener(event -> {
             String input = JOptionPane.showInputDialog("Enter new budget:");
             BigDecimal newTotal = new BigDecimal(input);
-            project.getBudget().setBudget(newTotal);
-            project.getChangelog().budgetEdited();
+            myProject.getBudget().setBudget(newTotal);
+            myProject.getChangelog().budgetEdited();
 
             updateBudgetDisplay();
         });
 
-        viewSpending.addActionListener(event -> displayExpenditures());
+        myViewSpending.addActionListener(event -> displayExpenditures());
 
-        addSpending.addActionListener(event -> displayAdding());
+        myAddSpending.addActionListener(event -> displayAdding());
 
-        backButton.addActionListener(event -> {
+        myBackButton.addActionListener(event -> {
             dispose();
-            new ProjectFrame(project);
+            new ProjectFrame(myProject);
         });
     }
 
     /**
-     * Displays all expenditures of a project on a separate window.
+     * Displays all expenditures of a myProject on a separate window.
      */
     private void displayExpenditures() {
         JFrame costFrame = new JFrame("Expenditures");
@@ -184,7 +184,7 @@ public class BudgetPage extends JFrame {
         costFrame.add(scroll);
 
         mainPanel.removeAll();
-        for (Purchase cost : project.getSpending().getPurchases()) {
+        for (Purchase cost : myProject.getSpending().getPurchases()) {
             JButton costButton = getCostButton(cost, costFrame);
             mainPanel.add(costButton);
         }
@@ -200,14 +200,14 @@ public class BudgetPage extends JFrame {
     /**
      * Initializes the options of all expenditures.
      *
-     * @param cost the expenditure
-     * @param costFrame the frame which displays all expenditures
+     * @param theCost the expenditure
+     * @param theCostFrame the frame which displays all expenditures
      * @return an initialized JButton for the given expenditure
      */
-    private JButton getCostButton(Purchase cost, JFrame costFrame) {
+    private JButton getCostButton(final Purchase theCost, final JFrame theCostFrame) {
         JButton costButton = new JButton();
-        costButton.setText(cost.getName() + "    |    $" +
-                cost.getPrice().setScale(2, RoundingMode.HALF_EVEN));
+        costButton.setText(theCost.getName() + "    |    $" +
+                theCost.getPrice().setScale(2, RoundingMode.HALF_EVEN));
         costButton.setMinimumSize(new Dimension(350, 40));
         costButton.setMaximumSize(new Dimension(350, 40));
 
@@ -219,8 +219,8 @@ public class BudgetPage extends JFrame {
                     null, options, options[0]);
 
             if (selection == 0) {
-                JTextField enterName = new JTextField(cost.getName());
-                JTextField enterCost = new JTextField(String.valueOf(cost.getPrice()));
+                JTextField enterName = new JTextField(theCost.getName());
+                JTextField enterCost = new JTextField(String.valueOf(theCost.getPrice()));
                 Object[] msg = {
                         "Edit Name:", enterName,
                         "Edit Cost:", enterCost
@@ -230,26 +230,26 @@ public class BudgetPage extends JFrame {
                         "Edit Expenditure", JOptionPane.OK_CANCEL_OPTION);
                 if (option == JOptionPane.OK_OPTION) {
                     BigDecimal newCost = new BigDecimal(enterCost.getText());
-                    cost.setName(enterName.getText());
-                    cost.setPrice(newCost);
-                    project.getSpending().setTotal();
+                    theCost.setName(enterName.getText());
+                    theCost.setPrice(newCost);
+                    myProject.getSpending().setTotal();
 
-                    project.getChangelog().purchaseEdited(enterName.getText());
+                    myProject.getChangelog().purchaseEdited(enterName.getText());
                     updateBudgetDisplay();
-                    costFrame.dispose();
+                    theCostFrame.dispose();
                 }
             } else if (selection == 1) {
                 int option = JOptionPane.showConfirmDialog(null,
                         "Do you want to delete this?", "Confirm Deletion",
                         JOptionPane.YES_NO_OPTION);
                 if (option == JOptionPane.YES_OPTION) {
-                    project.getSpending().removePurchase(cost.getName());
+                    myProject.getSpending().removePurchase(theCost.getName());
 
-                    project.getSpending().setTotal();
+                    myProject.getSpending().setTotal();
 
-                    project.getChangelog().purchaseRemoved(cost.getName());
+                    myProject.getChangelog().purchaseRemoved(theCost.getName());
                     updateBudgetDisplay();
-                    costFrame.dispose();
+                    theCostFrame.dispose();
                 }
             }
         });
@@ -276,8 +276,8 @@ public class BudgetPage extends JFrame {
             DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy");
             Purchase newSpending = new Purchase(enterName.getText(), newCost, date.format(format));
 
-            project.getSpending().addPurchase(newSpending);
-            project.getChangelog().purchasedItem(enterName.getText());
+            myProject.getSpending().addPurchase(newSpending);
+            myProject.getChangelog().purchasedItem(enterName.getText());
             updateBudgetDisplay();
         }
     }
@@ -286,16 +286,16 @@ public class BudgetPage extends JFrame {
      * Updates the BudgetPage's total budget, current amount spent, and remaining budget.
      */
     private void updateBudgetDisplay() {
-        totalLabel.setText("Total Budget: $" + project.getBudget().getBudget());
-        currentAmtLabel.setText("Current Spending: $" + project.getSpending().getTotal());
+        myTotalLabel.setText("Total Budget: $" + myProject.getBudget().getBudget());
+        myCurrentAmtLabel.setText("Current Spending: $" + myProject.getSpending().getTotal());
 
         BigDecimal remaining =
-                project.getBudget().getBudget().subtract(project.getSpending().getTotal());
+                myProject.getBudget().getBudget().subtract(myProject.getSpending().getTotal());
 
         if (remaining.compareTo(BigDecimal.ZERO) < 0) {
-            remainingLabel.setText("Remaining Budget: -$" + remaining.abs());
+            myRemainingLabel.setText("Remaining Budget: -$" + remaining.abs());
         } else {
-            remainingLabel.setText("Remaining Budget: $" + remaining);
+            myRemainingLabel.setText("Remaining Budget: $" + remaining);
         }
     }
 }

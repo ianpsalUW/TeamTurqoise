@@ -19,47 +19,47 @@ public class Project {
     /**
      * The Project's list of documents.
      */
-    ArrayList<Document> myDocumentList;
+    private final ArrayList<Document> myDocumentList;
 
     /**
      * The Project's name.
      */
-    String myProjectName = "Default name";
+    private String myProjectName = "Default name";
 
     /**
      * The Project's budget.
      */
-    Budget myBudget;
+    private final Budget myBudget;
 
     /**
      * The Project's list of expenditures.
      */
-    Spending mySpending;
+    private final Spending mySpending;
 
     /**
      * The Project's privacy attribute.
      */
-    boolean myPrivacy = false;
+    private boolean myPrivacy = false;
 
     /**
      * The Project's listener for documents being added.
      */
-    ArrayList<DocumentAddedListener> myDocumentAddedListeners;
+    private final ArrayList<DocumentAddedListener> myDocumentAddedListeners;
 
     /**
      * The Project's changelog.
      */
-    Changelog myChangelog;
+    private final Changelog myChangelog;
 
     /**
      * The Project's folder on which it is located at.
      */
-    ProjectFolder myFolder;
+    private final ProjectFolder myFolder;
 
     /**
      * The Project's directory on which it is located at.
      */
-    String myDirectory;
+    private final String myDirectory;
 
 
     /**
@@ -72,7 +72,8 @@ public class Project {
      * @param theBudget a Budget object
      * @param theProjectFolder a ProjectFolder object
      */
-    public Project(String theProjectName, boolean thePrivacy, Budget theBudget, ProjectFolder theProjectFolder) {
+    public Project(final String theProjectName, final boolean thePrivacy, final Budget theBudget,
+                   final ProjectFolder theProjectFolder) {
         myFolder = theProjectFolder;
         myDirectory = myFolder.getMyDirectory() + File.separator + theProjectName;
         createDir();
@@ -100,7 +101,7 @@ public class Project {
      * @param theDocument the Document being added
      * @return a Boolean
      */
-    public boolean addDocument(Document theDocument) {
+    public boolean addDocument(final Document theDocument) {
         if (myDocumentList.contains(theDocument)) {
             return false;
         }
@@ -115,7 +116,7 @@ public class Project {
      * @param theDocument the Document being removed
      * @return the Document being removed
      */
-    public Document removeDocument(Document theDocument) throws Exception {
+    public Document removeDocument(final Document theDocument) throws Exception {
         if (!myDocumentList.contains(theDocument)) {
             throw new Exception("Document not found.");
         } else {
@@ -174,18 +175,18 @@ public class Project {
      *
      * @param listener the listener
      */
-    public void addDocumentAddedListener(DocumentAddedListener listener) {
+    public void addDocumentAddedListener(final DocumentAddedListener listener) {
         myDocumentAddedListeners.add(listener);
     }
 
     /**
      * Notifies all DocumentAddedListeners.
      *
-     * @param document a Document object.
+     * @param theDocument a Document object.
      */
-    private void notifyDocumentAddedListeners(Document document) {
+    private void notifyDocumentAddedListeners(final Document theDocument) {
         for (DocumentAddedListener listener : myDocumentAddedListeners) {
-            listener.documentAdded(document);
+            listener.documentAdded(theDocument);
         }
     }
 
